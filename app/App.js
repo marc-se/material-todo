@@ -123,13 +123,13 @@ class App extends React.Component {
 				<div className="col-md-2"></div>
 		    	<div className="col-md-8">
 					<MuiThemeProvider muiTheme={ getMuiTheme() } >
-				    	<TodoList data={ this.state.data } storage={storage} updateStatus={ (data, checked) => this.updateStatus(this.state.data, checked)} />
+				    	<TodoList data={ this.state.data } storage={ storage } updateStatus={ (data, checked) => this.updateStatus(this.state.data, checked)} />
 				  	</MuiThemeProvider>
 				  	<MuiThemeProvider muiTheme={ getMuiTheme() } >
 				    	<TodoInput addItem={ (e) => this.addItem(e) } fuzzySearch={ this.state.fuzzySearch } />
 				  	</MuiThemeProvider>
 				  	<MuiThemeProvider muiTheme={ getMuiTheme() } >
-				  		<div>TOOLBAR</div>
+				  		<DeleteButton data={ this.state.data } />
 				  	</MuiThemeProvider>
 			  	</div>
 			  	<div className="col-md-2"></div>

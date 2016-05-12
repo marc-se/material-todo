@@ -72,11 +72,11 @@
 
 	var _todoInput2 = _interopRequireDefault(_todoInput);
 
-	var _deleteButton = __webpack_require__(374);
+	var _deleteButton = __webpack_require__(338);
 
 	var _deleteButton2 = _interopRequireDefault(_deleteButton);
 
-	var _objectHash = __webpack_require__(349);
+	var _objectHash = __webpack_require__(339);
 
 	var _objectHash2 = _interopRequireDefault(_objectHash);
 
@@ -113,7 +113,7 @@
 
 			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(App).call(this));
 
-			var injectTapEventPlugin = __webpack_require__(338);
+			var injectTapEventPlugin = __webpack_require__(362);
 			injectTapEventPlugin();
 
 			for (var item in storage) {
@@ -303,11 +303,7 @@
 						_react2.default.createElement(
 							_MuiThemeProvider2.default,
 							{ muiTheme: (0, _getMuiTheme2.default)() },
-							_react2.default.createElement(
-								'div',
-								null,
-								'TOOLBAR'
-							)
+							_react2.default.createElement(_deleteButton2.default, { data: this.state.data })
 						)
 					),
 					_react2.default.createElement('div', { className: 'col-md-2' })
@@ -39705,368 +39701,527 @@
 /* 338 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(process) {var invariant = __webpack_require__(339);
-	var defaultClickRejectionStrategy = __webpack_require__(340);
+	'use strict';
 
-	var alreadyInjected = false;
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 
-	module.exports = function injectTapEventPlugin (strategyOverrides) {
-	  strategyOverrides = strategyOverrides || {}
-	  var shouldRejectClick = strategyOverrides.shouldRejectClick || defaultClickRejectionStrategy;
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	  if (process.env.NODE_ENV !== 'production') {
-	    invariant(
-	      !alreadyInjected,
-	      'injectTapEventPlugin(): Can only be called once per application lifecycle.\n\n\
-	It is recommended to call injectTapEventPlugin() just before you call \
-	ReactDOM.render(). If you are using an external library which calls injectTapEventPlugin() \
-	itself, please contact the maintainer as it shouldn\'t be called in library code and \
-	should be injected by the application.'
-	    )
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _RaisedButton = __webpack_require__(368);
+
+	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
+
+	var _FontIcon = __webpack_require__(291);
+
+	var _FontIcon2 = _interopRequireDefault(_FontIcon);
+
+	var _colors = __webpack_require__(179);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var styles = {
+	  button: {
+	    marginTop: 12,
+	    marginLeft: 12,
+	    marginRight: 0,
+	    marginBottom: 12,
+	    float: 'right'
 	  }
 
-	  alreadyInjected = true;
-
-	  __webpack_require__(42).injection.injectEventPluginsByName({
-	    'TapEventPlugin':       __webpack_require__(341)(shouldRejectClick)
-	  });
 	};
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+	var DeleteButton = function (_React$Component) {
+	  _inherits(DeleteButton, _React$Component);
+
+	  function DeleteButton() {
+	    _classCallCheck(this, DeleteButton);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(DeleteButton).apply(this, arguments));
+	  }
+
+	  _createClass(DeleteButton, [{
+	    key: 'handleDelete',
+	    value: function handleDelete(e) {
+	      console.log("delete!");
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(_RaisedButton2.default, {
+	          label: 'delete selected items',
+	          linkButton: false,
+	          onClick: function onClick(e) {
+	            return _this2.handleDelete(e);
+	          },
+	          style: styles.button,
+	          icon: _react2.default.createElement(
+	            _FontIcon2.default,
+	            { className: 'material-icons' },
+	            'delete'
+	          ),
+	          backgroundColor: _colors.grey100
+	        })
+	      );
+	    }
+	  }]);
+
+	  return DeleteButton;
+	}(_react2.default.Component);
+
+	;
+
+	exports.default = DeleteButton;
 
 /***/ },
 /* 339 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(process) {/**
-	 * Copyright 2013-2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule invariant
-	 */
+	/* WEBPACK VAR INJECTION */(function(Buffer) {'use strict';
 
-	"use strict";
+	var crypto = __webpack_require__(344);
 
 	/**
-	 * Use invariant() to assert state which your program assumes to be true.
+	 * Exported function
 	 *
-	 * Provide sprintf-style format (only %s is supported) and arguments
-	 * to provide information about what broke and what you were
-	 * expecting.
+	 * Options:
 	 *
-	 * The invariant message will be stripped in production, but the invariant
-	 * will remain to ensure logic does not differ in production.
+	 *  - `algorithm` hash algo to be used by this instance: *'sha1', 'md5' 
+	 *  - `excludeValues` {true|*false} hash object keys, values ignored 
+	 *  - `encoding` hash encoding, supports 'buffer', '*hex', 'binary', 'base64' 
+	 *  - `ignoreUnknown` {true|*false} ignore unknown object types
+	 *  - `replacer` optional function that replaces values before hashing
+	 *  - `respectFunctionProperties` {*true|false} consider function properties when hashing
+	 *  - `respectFunctionNames` {*true|false} consider 'name' property of functions for hashing
+	 *  - `respectType` {*true|false} Respect special properties (prototype, constructor)
+	 *    when hashing to distinguish between types
+	 *  - `unorderedArrays` {true|*false} Sort all arrays before hashing
+	 *  - `unorderedSets` {*true|false} Sort `Set` and `Map` instances before hashing
+	 *  * = default
+	 *
+	 * @param {object} object value to hash
+	 * @param {object} options hashing options
+	 * @return {string} hash value
+	 * @api public
 	 */
+	exports = module.exports = objectHash;
 
-	var invariant = function (condition, format, a, b, c, d, e, f) {
-	  if (process.env.NODE_ENV !== 'production') {
-	    if (format === undefined) {
-	      throw new Error('invariant requires an error message argument');
+	function objectHash(object, options){
+	  options = applyDefaults(object, options);
+
+	  return hash(object, options);
+	}
+
+	/**
+	 * Exported sugar methods
+	 *
+	 * @param {object} object value to hash
+	 * @return {string} hash value
+	 * @api public
+	 */
+	exports.sha1 = function(object){
+	  return objectHash(object);
+	};
+	exports.keys = function(object){
+	  return objectHash(object, {excludeValues: true, algorithm: 'sha1', encoding: 'hex'});
+	};
+	exports.MD5 = function(object){
+	  return objectHash(object, {algorithm: 'md5', encoding: 'hex'});
+	};
+	exports.keysMD5 = function(object){
+	  return objectHash(object, {algorithm: 'md5', encoding: 'hex', excludeValues: true});
+	};
+
+	// Internals
+	function applyDefaults(object, options){
+	  var hashes = crypto.getHashes ? crypto.getHashes() : ['sha1', 'md5'];
+	  var encodings = ['buffer', 'hex', 'binary', 'base64'];
+	  
+	  options = options || {};
+	  options.algorithm = options.algorithm || 'sha1';
+	  options.encoding = options.encoding || 'hex';
+	  options.excludeValues = options.excludeValues ? true : false;
+	  options.algorithm = options.algorithm.toLowerCase();
+	  options.encoding = options.encoding.toLowerCase();
+	  options.ignoreUnknown = options.ignoreUnknown !== true ? false : true; // default to false
+	  options.respectType = options.respectType === false ? false : true; // default to true
+	  options.respectFunctionNames = options.respectFunctionNames === false ? false : true;
+	  options.respectFunctionProperties = options.respectFunctionProperties === false ? false : true;
+	  options.unorderedArrays = options.unorderedArrays !== true ? false : true; // default to false
+	  options.unorderedSets = options.unorderedSets === false ? false : true; // default to false
+	  options.replacer = options.replacer || undefined;
+
+	  if(typeof object === 'undefined') {
+	    throw new Error('Object argument required.');
+	  }
+
+	  hashes.push('passthrough');
+	  // if there is a case-insensitive match in the hashes list, accept it
+	  // (i.e. SHA256 for sha256)
+	  for (var i = 0; i < hashes.length; ++i) {
+	    if (hashes[i].toLowerCase() === options.algorithm.toLowerCase()) {
+	      options.algorithm = hashes[i];
 	    }
 	  }
-
-	  if (!condition) {
-	    var error;
-	    if (format === undefined) {
-	      error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
-	    } else {
-	      var args = [a, b, c, d, e, f];
-	      var argIndex = 0;
-	      error = new Error('Invariant Violation: ' + format.replace(/%s/g, function () {
-	        return args[argIndex++];
-	      }));
-	    }
-
-	    error.framesToPop = 1; // we don't care about invariant's own frame
-	    throw error;
+	  
+	  if(hashes.indexOf(options.algorithm) === -1){
+	    throw new Error('Algorithm "' + options.algorithm + '"  not supported. ' +
+	      'supported values: ' + hashes.join(', '));
 	  }
-	};
 
-	module.exports = invariant;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
-
-/***/ },
-/* 340 */
-/***/ function(module, exports) {
-
-	module.exports = function(lastTouchEvent, clickTimestamp) {
-	  if (lastTouchEvent && (clickTimestamp - lastTouchEvent) < 750) {
-	    return true;
+	  if(encodings.indexOf(options.encoding) === -1 &&
+	     options.algorithm !== 'passthrough'){
+	    throw new Error('Encoding "' + options.encoding + '"  not supported. ' +
+	      'supported values: ' + encodings.join(', '));
 	  }
-	};
-
-
-/***/ },
-/* 341 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-2014 Facebook, Inc.
-	 *
-	 * Licensed under the Apache License, Version 2.0 (the "License");
-	 * you may not use this file except in compliance with the License.
-	 * You may obtain a copy of the License at
-	 *
-	 * http://www.apache.org/licenses/LICENSE-2.0
-	 *
-	 * Unless required by applicable law or agreed to in writing, software
-	 * distributed under the License is distributed on an "AS IS" BASIS,
-	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-	 * See the License for the specific language governing permissions and
-	 * limitations under the License.
-	 *
-	 * @providesModule TapEventPlugin
-	 * @typechecks static-only
-	 */
-
-	"use strict";
-
-	var EventConstants = __webpack_require__(40);
-	var EventPluginUtils = __webpack_require__(44);
-	var EventPropagators = __webpack_require__(41);
-	var SyntheticUIEvent = __webpack_require__(69);
-	var TouchEventUtils = __webpack_require__(342);
-	var ViewportMetrics = __webpack_require__(70);
-
-	var keyOf = __webpack_require__(343);
-	var topLevelTypes = EventConstants.topLevelTypes;
-
-	var isStartish = EventPluginUtils.isStartish;
-	var isEndish = EventPluginUtils.isEndish;
-
-	var isTouch = function(topLevelType) {
-	  var touchTypes = [
-	    topLevelTypes.topTouchCancel,
-	    topLevelTypes.topTouchEnd,
-	    topLevelTypes.topTouchStart,
-	    topLevelTypes.topTouchMove
-	  ];
-	  return touchTypes.indexOf(topLevelType) >= 0;
+	  
+	  return options;
 	}
 
-	/**
-	 * Number of pixels that are tolerated in between a `touchStart` and `touchEnd`
-	 * in order to still be considered a 'tap' event.
-	 */
-	var tapMoveThreshold = 10;
-	var ignoreMouseThreshold = 750;
-	var startCoords = {x: null, y: null};
-	var lastTouchEvent = null;
-
-	var Axis = {
-	  x: {page: 'pageX', client: 'clientX', envScroll: 'currentPageScrollLeft'},
-	  y: {page: 'pageY', client: 'clientY', envScroll: 'currentPageScrollTop'}
-	};
-
-	function getAxisCoordOfEvent(axis, nativeEvent) {
-	  var singleTouch = TouchEventUtils.extractSingleTouch(nativeEvent);
-	  if (singleTouch) {
-	    return singleTouch[axis.page];
+	/** Check if the given function is a native function */
+	function isNativeFunction(f) {
+	  if ((typeof f) !== 'function') {
+	    return false;
 	  }
-	  return axis.page in nativeEvent ?
-	    nativeEvent[axis.page] :
-	    nativeEvent[axis.client] + ViewportMetrics[axis.envScroll];
+	  var exp = /^function\s+\w*\s*\(\s*\)\s*{\s+\[native code\]\s+}$/i;
+	  return exp.exec(Function.prototype.toString.call(f)) != null;
 	}
 
-	function getDistance(coords, nativeEvent) {
-	  var pageX = getAxisCoordOfEvent(Axis.x, nativeEvent);
-	  var pageY = getAxisCoordOfEvent(Axis.y, nativeEvent);
-	  return Math.pow(
-	    Math.pow(pageX - coords.x, 2) + Math.pow(pageY - coords.y, 2),
-	    0.5
-	  );
-	}
-
-	var touchEvents = [
-	  topLevelTypes.topTouchStart,
-	  topLevelTypes.topTouchCancel,
-	  topLevelTypes.topTouchEnd,
-	  topLevelTypes.topTouchMove,
-	];
-
-	var dependencies = [
-	  topLevelTypes.topMouseDown,
-	  topLevelTypes.topMouseMove,
-	  topLevelTypes.topMouseUp,
-	].concat(touchEvents);
-
-	var eventTypes = {
-	  touchTap: {
-	    phasedRegistrationNames: {
-	      bubbled: keyOf({onTouchTap: null}),
-	      captured: keyOf({onTouchTapCapture: null})
-	    },
-	    dependencies: dependencies
-	  }
-	};
-
-	var now = (function() {
-	  if (Date.now) {
-	    return Date.now;
+	function hash(object, options) {
+	  var hashingStream;
+	  
+	  if (options.algorithm !== 'passthrough') {
+	    hashingStream = crypto.createHash(options.algorithm);
 	  } else {
-	    // IE8 support: http://stackoverflow.com/questions/9430357/please-explain-why-and-how-new-date-works-as-workaround-for-date-now-in
-	    return function () {
-	      return +new Date;
-	    }
+	    hashingStream = new PassThrough();
 	  }
-	})();
+	  
+	  if (typeof hashingStream.write === 'undefined') {
+	    hashingStream.write = hashingStream.update;
+	    hashingStream.end   = hashingStream.update;
+	  }
+	  
+	  var hasher = typeHasher(options, hashingStream);
+	  hasher.dispatch(object);
+	  hashingStream.end(''); // write empty string since .update() requires a string arg
+	  
+	  if (typeof hashingStream.read === 'undefined' &&
+	      typeof hashingStream.digest === 'function') {
+	    return hashingStream.digest(options.encoding === 'buffer' ? undefined : options.encoding);
+	  }
 
-	function createTapEventPlugin(shouldRejectClick) {
+	  var buf = hashingStream.read();
+	  if (options.encoding === 'buffer') {
+	    return buf;
+	  }
+	  
+	  return buf.toString(options.encoding);
+	}
+
+	/**
+	 * Expose streaming API
+	 *
+	 * @param {object} object  Value to serialize
+	 * @param {object} options  Options, as for hash()
+	 * @param {object} stream  A stream to write the serializiation to
+	 * @api public
+	 */
+	exports.writeToStream = function(object, options, stream) {
+	  if (typeof stream === 'undefined') {
+	    stream = options;
+	    options = {};
+	  }
+	  
+	  options = applyDefaults(object, options);
+	  
+	  return typeHasher(options, stream).dispatch(object);
+	};
+
+	function typeHasher(options, writeTo, context){
+	  context = context || [];
+	  
 	  return {
+	    dispatch: function(value){
+	      if (options.replacer) {
+	        value = options.replacer(value);
+	      }
+	      
+	      var type = typeof value;
+	      if (value === null) {
+	        type = 'null';
+	      }
 
-	    tapMoveThreshold: tapMoveThreshold,
-
-	    ignoreMouseThreshold: ignoreMouseThreshold,
-
-	    eventTypes: eventTypes,
-
-	    /**
-	     * @param {string} topLevelType Record from `EventConstants`.
-	     * @param {DOMEventTarget} targetInst The listening component root node.
-	     * @param {object} nativeEvent Native browser event.
-	     * @return {*} An accumulation of synthetic events.
-	     * @see {EventPluginHub.extractEvents}
-	     */
-	    extractEvents: function(
-	      topLevelType,
-	      targetInst,
-	      nativeEvent,
-	      nativeEventTarget
-	    ) {
-
-	      if (isTouch(topLevelType)) {
-	        lastTouchEvent = now();
+	      //console.log("[DEBUG] Dispatch: ", value, "->", type, " -> ", "_" + type);
+	      
+	      return this['_' + type](value);
+	    },
+	    _object: function(object) {
+	      var pattern = (/\[object (.*)\]/i);
+	      var objString = Object.prototype.toString.call(object);
+	      var objType = pattern.exec(objString);
+	      if (!objType) { // object type did not match [object ...]
+	        objType = 'unknown:[' + objString + ']';
 	      } else {
-	        if (shouldRejectClick(lastTouchEvent, now())) {
-	          return null;
+	        objType = objType[1]; // take only the class name
+	      }
+	      
+	      objType = objType.toLowerCase();
+	            
+	      var objectNumber = null;
+
+	      if ((objectNumber = context.indexOf(object)) >= 0) {
+	        return this.dispatch('[CIRCULAR:' + objectNumber + ']');
+	      } else {
+	        context.push(object);
+	      }
+	      
+	      if (typeof Buffer !== 'undefined' && Buffer.isBuffer && Buffer.isBuffer(object)) {
+	        writeTo.write('buffer:');
+	        return writeTo.write(object);
+	      }
+
+	      if(objType !== 'object' && objType !== 'function') {
+	        if(this['_' + objType]) {
+	          this['_' + objType](object);
+	        } else if (options.ignoreUnknown) {
+	          return writeTo.write('[' + objType + ']');
+	        } else {
+	          throw new Error('Unknown object type "' + objType + '"');
 	        }
+	      }else{
+	        var keys = Object.keys(object).sort();
+	        // Make sure to incorporate special properties, so
+	        // Types with different prototypes will produce
+	        // a different hash and objects derived from
+	        // different functions (`new Foo`, `new Bar`) will
+	        // produce different hashes.
+	        // We never do this for native functions since some
+	        // seem to break because of that.
+	        if (options.respectType !== false && !isNativeFunction(object)) {
+	          keys.splice(0, 0, 'prototype', '__proto__', 'constructor');
+	        }
+	        
+	        writeTo.write('object:' + keys.length + ':');
+	        var self = this;
+	        return keys.forEach(function(key){
+	          self.dispatch(key);
+	          writeTo.write(':');
+	          if(!options.excludeValues) {
+	            self.dispatch(object[key]);
+	          }
+	          writeTo.write(',');
+	        });
+	      }
+	    },
+	    _array: function(arr, unordered){
+	      unordered = typeof unordered !== 'undefined' ? unordered :
+	        options.unorderedArrays !== false; // default to options.unorderedArrays
+	      
+	      var self = this;
+	      writeTo.write('array:' + arr.length + ':');
+	      if (!unordered || arr.length <= 1) {
+	        return arr.forEach(function(entry) {
+	          return self.dispatch(entry);
+	        });
+	      }
+	      
+	      // the unordered case is a little more complicated:
+	      // since there is no canonical ordering on objects,
+	      // i.e. {a:1} < {a:2} and {a:1} > {a:2} are both false,
+	      // we first serialize each entry using a PassThrough stream
+	      // before sorting.
+	      // also: we can’t use the same context array for all entries
+	      // since the order of hashing should *not* matter. instead,
+	      // we keep track of the additions to a copy of the context array
+	      // and add all of them to the global context array when we’re done
+	      var contextAdditions = [];
+	      var entries = arr.map(function(entry) {
+	        var strm = new PassThrough();
+	        var localContext = context.slice(); // make copy
+	        var hasher = typeHasher(options, strm, localContext);
+	        hasher.dispatch(entry);
+	        // take only what was added to localContext and append it to contextAdditions
+	        contextAdditions = contextAdditions.concat(localContext.slice(context.length));
+	        return strm.read().toString();
+	      });
+	      context = context.concat(contextAdditions);
+	      entries.sort();
+	      return this._array(entries, false);
+	    },
+	    _date: function(date){
+	      return writeTo.write('date:' + date.toJSON());
+	    },
+	    _symbol: function(sym){
+	      return writeTo.write('symbol:' + sym.toString(), 'utf8');
+	    },
+	    _error: function(err){
+	      return writeTo.write('error:' + err.toString(), 'utf8');
+	    },
+	    _boolean: function(bool){
+	      return writeTo.write('bool:' + bool.toString());
+	    },
+	    _string: function(string){
+	      writeTo.write('string:' + string.length + ':');
+	      writeTo.write(string, 'utf8');
+	    },
+	    _function: function(fn){
+	      writeTo.write('fn:');
+	      if (isNativeFunction(fn)) {
+	        this.dispatch('[native]');
+	      } else {
+	        this.dispatch(fn.toString());
 	      }
 
-	      if (!isStartish(topLevelType) && !isEndish(topLevelType)) {
-	        return null;
+	      if (options.respectFunctionNames !== false) {
+	        // Make sure we can still distinguish native functions
+	        // by their name, otherwise String and Function will
+	        // have the same hash
+	        this.dispatch("function-name:" + String(fn.name));
 	      }
-	      var event = null;
-	      var distance = getDistance(startCoords, nativeEvent);
-	      if (isEndish(topLevelType) && distance < tapMoveThreshold) {
-	        event = SyntheticUIEvent.getPooled(
-	          eventTypes.touchTap,
-	          targetInst,
-	          nativeEvent,
-	          nativeEventTarget
-	        );
+	      
+	      if (options.respectFunctionProperties) {
+	        this._object(fn);
 	      }
-	      if (isStartish(topLevelType)) {
-	        startCoords.x = getAxisCoordOfEvent(Axis.x, nativeEvent);
-	        startCoords.y = getAxisCoordOfEvent(Axis.y, nativeEvent);
-	      } else if (isEndish(topLevelType)) {
-	        startCoords.x = 0;
-	        startCoords.y = 0;
+	    },
+	    _number: function(number){
+	      return writeTo.write('number:' + number.toString());
+	    },
+	    _xml: function(xml){
+	      return writeTo.write('xml:' + xml.toString(), 'utf8');
+	    },
+	    _null: function() {
+	      return writeTo.write('Null');
+	    },
+	    _undefined: function() {
+	      return writeTo.write('Undefined');
+	    },
+	    _regexp: function(regex){
+	      return writeTo.write('regex:' + regex.toString(), 'utf8');
+	    },
+	    _uint8array: function(arr){
+	      writeTo.write('uint8array:');
+	      return this.dispatch(Array.prototype.slice.call(arr));
+	    },
+	    _uint8clampedarray: function(arr){
+	      writeTo.write('uint8clampedarray:');
+	      return this.dispatch(Array.prototype.slice.call(arr));
+	    },
+	    _int8array: function(arr){
+	      writeTo.write('uint8array:');
+	      return this.dispatch(Array.prototype.slice.call(arr));
+	    },
+	    _uint16array: function(arr){
+	      writeTo.write('uint16array:');
+	      return this.dispatch(Array.prototype.slice.call(arr));
+	    },
+	    _int16array: function(arr){
+	      writeTo.write('uint16array:');
+	      return this.dispatch(Array.prototype.slice.call(arr));
+	    },
+	    _uint32array: function(arr){
+	      writeTo.write('uint32array:');
+	      return this.dispatch(Array.prototype.slice.call(arr));
+	    },
+	    _int32array: function(arr){
+	      writeTo.write('uint32array:');
+	      return this.dispatch(Array.prototype.slice.call(arr));
+	    },
+	    _float32array: function(arr){
+	      writeTo.write('float32array:');
+	      return this.dispatch(Array.prototype.slice.call(arr));
+	    },
+	    _float64array: function(arr){
+	      writeTo.write('float64array:');
+	      return this.dispatch(Array.prototype.slice.call(arr));
+	    },
+	    _arraybuffer: function(arr){
+	      writeTo.write('arraybuffer:');
+	      return this.dispatch(new Uint8Array(arr));
+	    },
+	    _url: function(url) {
+	      return writeTo.write('url:' + url.toString(), 'utf8');
+	    },
+	    _map: function(map) {
+	      writeTo.write('map:');
+	      var arr = Array.from(map);
+	      return this._array(arr, options.unorderedSets !== false);
+	    },
+	    _set: function(set) {
+	      writeTo.write('set:');
+	      var arr = Array.from(set);
+	      return this._array(arr, options.unorderedSets !== false);
+	    },
+	    _blob: function() {
+	      if (options.ignoreUnknown) {
+	        return writeTo.write('[blob]');
 	      }
-	      EventPropagators.accumulateTwoPhaseDispatches(event);
-	      return event;
-	    }
-
+	      
+	      throw Error('Hashing Blob objects is currently not supported\n' +
+	        '(see https://github.com/puleos/object-hash/issues/26)\n' +
+	        'Use "options.replacer" or "options.ignoreUnknown"\n');
+	    },
+	    _domwindow: function() { return writeTo.write('domwindow'); },
+	    /* Node.js standard native objects */
+	    _process: function() { return writeTo.write('process'); },
+	    _timer: function() { return writeTo.write('timer'); },
+	    _pipe: function() { return writeTo.write('pipe'); },
+	    _tcp: function() { return writeTo.write('tcp'); },
+	    _udp: function() { return writeTo.write('udp'); },
+	    _tty: function() { return writeTo.write('tty'); },
+	    _statwatcher: function() { return writeTo.write('statwatcher'); },
+	    _securecontext: function() { return writeTo.write('securecontext'); },
+	    _connection: function() { return writeTo.write('connection'); },
+	    _zlib: function() { return writeTo.write('zlib'); },
+	    _context: function() { return writeTo.write('context'); },
+	    _nodescript: function() { return writeTo.write('nodescript'); },
+	    _httpparser: function() { return writeTo.write('httpparser'); },
+	    _dataview: function() { return writeTo.write('dataview'); },
+	    _signal: function() { return writeTo.write('signal'); },
+	    _fsevent: function() { return writeTo.write('fsevent'); },
+	    _tlswrap: function() { return writeTo.write('tlswrap'); }
 	  };
 	}
 
-	module.exports = createTapEventPlugin;
-
-
-/***/ },
-/* 342 */
-/***/ function(module, exports) {
-
-	/**
-	 * Copyright 2013-2014 Facebook, Inc.
-	 *
-	 * Licensed under the Apache License, Version 2.0 (the "License");
-	 * you may not use this file except in compliance with the License.
-	 * You may obtain a copy of the License at
-	 *
-	 * http://www.apache.org/licenses/LICENSE-2.0
-	 *
-	 * Unless required by applicable law or agreed to in writing, software
-	 * distributed under the License is distributed on an "AS IS" BASIS,
-	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-	 * See the License for the specific language governing permissions and
-	 * limitations under the License.
-	 *
-	 * @providesModule TouchEventUtils
-	 */
-
-	var TouchEventUtils = {
-	  /**
-	   * Utility function for common case of extracting out the primary touch from a
-	   * touch event.
-	   * - `touchEnd` events usually do not have the `touches` property.
-	   *   http://stackoverflow.com/questions/3666929/
-	   *   mobile-sarai-touchend-event-not-firing-when-last-touch-is-removed
-	   *
-	   * @param {Event} nativeEvent Native event that may or may not be a touch.
-	   * @return {TouchesObject?} an object with pageX and pageY or null.
-	   */
-	  extractSingleTouch: function(nativeEvent) {
-	    var touches = nativeEvent.touches;
-	    var changedTouches = nativeEvent.changedTouches;
-	    var hasTouches = touches && touches.length > 0;
-	    var hasChangedTouches = changedTouches && changedTouches.length > 0;
-
-	    return !hasTouches && hasChangedTouches ? changedTouches[0] :
-	           hasTouches ? touches[0] :
-	           nativeEvent;
-	  }
-	};
-
-	module.exports = TouchEventUtils;
-
-
-/***/ },
-/* 343 */
-/***/ function(module, exports) {
-
-	/**
-	 * Copyright 2013-2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule keyOf
-	 */
-
-	/**
-	 * Allows extraction of a minified key. Let's the build system minify keys
-	 * without losing the ability to dynamically use key strings as values
-	 * themselves. Pass in an object with a single key/val pair and it will return
-	 * you the string key of that single record. Suppose you want to grab the
-	 * value for a key 'className' inside of an object. Key/val minification may
-	 * have aliased that key to be 'xa12'. keyOf({className: null}) will return
-	 * 'xa12' in that case. Resolve keys you want to use once at startup time, then
-	 * reuse those resolutions.
-	 */
-	"use strict";
-
-	var keyOf = function (oneKeyObj) {
-	  var key;
-	  for (key in oneKeyObj) {
-	    if (!oneKeyObj.hasOwnProperty(key)) {
-	      continue;
+	// Mini-implementation of stream.PassThrough
+	// We are far from having need for the full implementation, and we can
+	// make assumtions like "many writes, then only one final read"
+	// and we can ignore encoding specifics
+	function PassThrough() {
+	  return {
+	    buf: '',
+	    
+	    write: function(b) {
+	      this.buf += b;
+	    },
+	    end: function(b) {
+	      this.buf += b;
+	    },
+	    read: function() {
+	      return this.buf;
 	    }
-	    return key;
-	  }
-	  return null;
-	};
+	  };
+	}
 
-	module.exports = keyOf;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(340).Buffer))
 
 /***/ },
-/* 344 */,
-/* 345 */
+/* 340 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer, global) {/*!
@@ -40079,9 +40234,9 @@
 
 	'use strict'
 
-	var base64 = __webpack_require__(346)
-	var ieee754 = __webpack_require__(347)
-	var isArray = __webpack_require__(348)
+	var base64 = __webpack_require__(341)
+	var ieee754 = __webpack_require__(342)
+	var isArray = __webpack_require__(343)
 
 	exports.Buffer = Buffer
 	exports.SlowBuffer = SlowBuffer
@@ -41618,10 +41773,10 @@
 	  return i
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(345).Buffer, (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(340).Buffer, (function() { return this; }())))
 
 /***/ },
-/* 346 */
+/* 341 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
@@ -41751,7 +41906,7 @@
 
 
 /***/ },
-/* 347 */
+/* 342 */
 /***/ function(module, exports) {
 
 	exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -41841,7 +41996,7 @@
 
 
 /***/ },
-/* 348 */
+/* 343 */
 /***/ function(module, exports) {
 
 	var toString = {}.toString;
@@ -41852,441 +42007,10 @@
 
 
 /***/ },
-/* 349 */
+/* 344 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(Buffer) {'use strict';
-
-	var crypto = __webpack_require__(350);
-
-	/**
-	 * Exported function
-	 *
-	 * Options:
-	 *
-	 *  - `algorithm` hash algo to be used by this instance: *'sha1', 'md5' 
-	 *  - `excludeValues` {true|*false} hash object keys, values ignored 
-	 *  - `encoding` hash encoding, supports 'buffer', '*hex', 'binary', 'base64' 
-	 *  - `ignoreUnknown` {true|*false} ignore unknown object types
-	 *  - `replacer` optional function that replaces values before hashing
-	 *  - `respectFunctionProperties` {*true|false} consider function properties when hashing
-	 *  - `respectFunctionNames` {*true|false} consider 'name' property of functions for hashing
-	 *  - `respectType` {*true|false} Respect special properties (prototype, constructor)
-	 *    when hashing to distinguish between types
-	 *  - `unorderedArrays` {true|*false} Sort all arrays before hashing
-	 *  - `unorderedSets` {*true|false} Sort `Set` and `Map` instances before hashing
-	 *  * = default
-	 *
-	 * @param {object} object value to hash
-	 * @param {object} options hashing options
-	 * @return {string} hash value
-	 * @api public
-	 */
-	exports = module.exports = objectHash;
-
-	function objectHash(object, options){
-	  options = applyDefaults(object, options);
-
-	  return hash(object, options);
-	}
-
-	/**
-	 * Exported sugar methods
-	 *
-	 * @param {object} object value to hash
-	 * @return {string} hash value
-	 * @api public
-	 */
-	exports.sha1 = function(object){
-	  return objectHash(object);
-	};
-	exports.keys = function(object){
-	  return objectHash(object, {excludeValues: true, algorithm: 'sha1', encoding: 'hex'});
-	};
-	exports.MD5 = function(object){
-	  return objectHash(object, {algorithm: 'md5', encoding: 'hex'});
-	};
-	exports.keysMD5 = function(object){
-	  return objectHash(object, {algorithm: 'md5', encoding: 'hex', excludeValues: true});
-	};
-
-	// Internals
-	function applyDefaults(object, options){
-	  var hashes = crypto.getHashes ? crypto.getHashes() : ['sha1', 'md5'];
-	  var encodings = ['buffer', 'hex', 'binary', 'base64'];
-	  
-	  options = options || {};
-	  options.algorithm = options.algorithm || 'sha1';
-	  options.encoding = options.encoding || 'hex';
-	  options.excludeValues = options.excludeValues ? true : false;
-	  options.algorithm = options.algorithm.toLowerCase();
-	  options.encoding = options.encoding.toLowerCase();
-	  options.ignoreUnknown = options.ignoreUnknown !== true ? false : true; // default to false
-	  options.respectType = options.respectType === false ? false : true; // default to true
-	  options.respectFunctionNames = options.respectFunctionNames === false ? false : true;
-	  options.respectFunctionProperties = options.respectFunctionProperties === false ? false : true;
-	  options.unorderedArrays = options.unorderedArrays !== true ? false : true; // default to false
-	  options.unorderedSets = options.unorderedSets === false ? false : true; // default to false
-	  options.replacer = options.replacer || undefined;
-
-	  if(typeof object === 'undefined') {
-	    throw new Error('Object argument required.');
-	  }
-
-	  hashes.push('passthrough');
-	  // if there is a case-insensitive match in the hashes list, accept it
-	  // (i.e. SHA256 for sha256)
-	  for (var i = 0; i < hashes.length; ++i) {
-	    if (hashes[i].toLowerCase() === options.algorithm.toLowerCase()) {
-	      options.algorithm = hashes[i];
-	    }
-	  }
-	  
-	  if(hashes.indexOf(options.algorithm) === -1){
-	    throw new Error('Algorithm "' + options.algorithm + '"  not supported. ' +
-	      'supported values: ' + hashes.join(', '));
-	  }
-
-	  if(encodings.indexOf(options.encoding) === -1 &&
-	     options.algorithm !== 'passthrough'){
-	    throw new Error('Encoding "' + options.encoding + '"  not supported. ' +
-	      'supported values: ' + encodings.join(', '));
-	  }
-	  
-	  return options;
-	}
-
-	/** Check if the given function is a native function */
-	function isNativeFunction(f) {
-	  if ((typeof f) !== 'function') {
-	    return false;
-	  }
-	  var exp = /^function\s+\w*\s*\(\s*\)\s*{\s+\[native code\]\s+}$/i;
-	  return exp.exec(Function.prototype.toString.call(f)) != null;
-	}
-
-	function hash(object, options) {
-	  var hashingStream;
-	  
-	  if (options.algorithm !== 'passthrough') {
-	    hashingStream = crypto.createHash(options.algorithm);
-	  } else {
-	    hashingStream = new PassThrough();
-	  }
-	  
-	  if (typeof hashingStream.write === 'undefined') {
-	    hashingStream.write = hashingStream.update;
-	    hashingStream.end   = hashingStream.update;
-	  }
-	  
-	  var hasher = typeHasher(options, hashingStream);
-	  hasher.dispatch(object);
-	  hashingStream.end(''); // write empty string since .update() requires a string arg
-	  
-	  if (typeof hashingStream.read === 'undefined' &&
-	      typeof hashingStream.digest === 'function') {
-	    return hashingStream.digest(options.encoding === 'buffer' ? undefined : options.encoding);
-	  }
-
-	  var buf = hashingStream.read();
-	  if (options.encoding === 'buffer') {
-	    return buf;
-	  }
-	  
-	  return buf.toString(options.encoding);
-	}
-
-	/**
-	 * Expose streaming API
-	 *
-	 * @param {object} object  Value to serialize
-	 * @param {object} options  Options, as for hash()
-	 * @param {object} stream  A stream to write the serializiation to
-	 * @api public
-	 */
-	exports.writeToStream = function(object, options, stream) {
-	  if (typeof stream === 'undefined') {
-	    stream = options;
-	    options = {};
-	  }
-	  
-	  options = applyDefaults(object, options);
-	  
-	  return typeHasher(options, stream).dispatch(object);
-	};
-
-	function typeHasher(options, writeTo, context){
-	  context = context || [];
-	  
-	  return {
-	    dispatch: function(value){
-	      if (options.replacer) {
-	        value = options.replacer(value);
-	      }
-	      
-	      var type = typeof value;
-	      if (value === null) {
-	        type = 'null';
-	      }
-
-	      //console.log("[DEBUG] Dispatch: ", value, "->", type, " -> ", "_" + type);
-	      
-	      return this['_' + type](value);
-	    },
-	    _object: function(object) {
-	      var pattern = (/\[object (.*)\]/i);
-	      var objString = Object.prototype.toString.call(object);
-	      var objType = pattern.exec(objString);
-	      if (!objType) { // object type did not match [object ...]
-	        objType = 'unknown:[' + objString + ']';
-	      } else {
-	        objType = objType[1]; // take only the class name
-	      }
-	      
-	      objType = objType.toLowerCase();
-	            
-	      var objectNumber = null;
-
-	      if ((objectNumber = context.indexOf(object)) >= 0) {
-	        return this.dispatch('[CIRCULAR:' + objectNumber + ']');
-	      } else {
-	        context.push(object);
-	      }
-	      
-	      if (typeof Buffer !== 'undefined' && Buffer.isBuffer && Buffer.isBuffer(object)) {
-	        writeTo.write('buffer:');
-	        return writeTo.write(object);
-	      }
-
-	      if(objType !== 'object' && objType !== 'function') {
-	        if(this['_' + objType]) {
-	          this['_' + objType](object);
-	        } else if (options.ignoreUnknown) {
-	          return writeTo.write('[' + objType + ']');
-	        } else {
-	          throw new Error('Unknown object type "' + objType + '"');
-	        }
-	      }else{
-	        var keys = Object.keys(object).sort();
-	        // Make sure to incorporate special properties, so
-	        // Types with different prototypes will produce
-	        // a different hash and objects derived from
-	        // different functions (`new Foo`, `new Bar`) will
-	        // produce different hashes.
-	        // We never do this for native functions since some
-	        // seem to break because of that.
-	        if (options.respectType !== false && !isNativeFunction(object)) {
-	          keys.splice(0, 0, 'prototype', '__proto__', 'constructor');
-	        }
-	        
-	        writeTo.write('object:' + keys.length + ':');
-	        var self = this;
-	        return keys.forEach(function(key){
-	          self.dispatch(key);
-	          writeTo.write(':');
-	          if(!options.excludeValues) {
-	            self.dispatch(object[key]);
-	          }
-	          writeTo.write(',');
-	        });
-	      }
-	    },
-	    _array: function(arr, unordered){
-	      unordered = typeof unordered !== 'undefined' ? unordered :
-	        options.unorderedArrays !== false; // default to options.unorderedArrays
-	      
-	      var self = this;
-	      writeTo.write('array:' + arr.length + ':');
-	      if (!unordered || arr.length <= 1) {
-	        return arr.forEach(function(entry) {
-	          return self.dispatch(entry);
-	        });
-	      }
-	      
-	      // the unordered case is a little more complicated:
-	      // since there is no canonical ordering on objects,
-	      // i.e. {a:1} < {a:2} and {a:1} > {a:2} are both false,
-	      // we first serialize each entry using a PassThrough stream
-	      // before sorting.
-	      // also: we can’t use the same context array for all entries
-	      // since the order of hashing should *not* matter. instead,
-	      // we keep track of the additions to a copy of the context array
-	      // and add all of them to the global context array when we’re done
-	      var contextAdditions = [];
-	      var entries = arr.map(function(entry) {
-	        var strm = new PassThrough();
-	        var localContext = context.slice(); // make copy
-	        var hasher = typeHasher(options, strm, localContext);
-	        hasher.dispatch(entry);
-	        // take only what was added to localContext and append it to contextAdditions
-	        contextAdditions = contextAdditions.concat(localContext.slice(context.length));
-	        return strm.read().toString();
-	      });
-	      context = context.concat(contextAdditions);
-	      entries.sort();
-	      return this._array(entries, false);
-	    },
-	    _date: function(date){
-	      return writeTo.write('date:' + date.toJSON());
-	    },
-	    _symbol: function(sym){
-	      return writeTo.write('symbol:' + sym.toString(), 'utf8');
-	    },
-	    _error: function(err){
-	      return writeTo.write('error:' + err.toString(), 'utf8');
-	    },
-	    _boolean: function(bool){
-	      return writeTo.write('bool:' + bool.toString());
-	    },
-	    _string: function(string){
-	      writeTo.write('string:' + string.length + ':');
-	      writeTo.write(string, 'utf8');
-	    },
-	    _function: function(fn){
-	      writeTo.write('fn:');
-	      if (isNativeFunction(fn)) {
-	        this.dispatch('[native]');
-	      } else {
-	        this.dispatch(fn.toString());
-	      }
-
-	      if (options.respectFunctionNames !== false) {
-	        // Make sure we can still distinguish native functions
-	        // by their name, otherwise String and Function will
-	        // have the same hash
-	        this.dispatch("function-name:" + String(fn.name));
-	      }
-	      
-	      if (options.respectFunctionProperties) {
-	        this._object(fn);
-	      }
-	    },
-	    _number: function(number){
-	      return writeTo.write('number:' + number.toString());
-	    },
-	    _xml: function(xml){
-	      return writeTo.write('xml:' + xml.toString(), 'utf8');
-	    },
-	    _null: function() {
-	      return writeTo.write('Null');
-	    },
-	    _undefined: function() {
-	      return writeTo.write('Undefined');
-	    },
-	    _regexp: function(regex){
-	      return writeTo.write('regex:' + regex.toString(), 'utf8');
-	    },
-	    _uint8array: function(arr){
-	      writeTo.write('uint8array:');
-	      return this.dispatch(Array.prototype.slice.call(arr));
-	    },
-	    _uint8clampedarray: function(arr){
-	      writeTo.write('uint8clampedarray:');
-	      return this.dispatch(Array.prototype.slice.call(arr));
-	    },
-	    _int8array: function(arr){
-	      writeTo.write('uint8array:');
-	      return this.dispatch(Array.prototype.slice.call(arr));
-	    },
-	    _uint16array: function(arr){
-	      writeTo.write('uint16array:');
-	      return this.dispatch(Array.prototype.slice.call(arr));
-	    },
-	    _int16array: function(arr){
-	      writeTo.write('uint16array:');
-	      return this.dispatch(Array.prototype.slice.call(arr));
-	    },
-	    _uint32array: function(arr){
-	      writeTo.write('uint32array:');
-	      return this.dispatch(Array.prototype.slice.call(arr));
-	    },
-	    _int32array: function(arr){
-	      writeTo.write('uint32array:');
-	      return this.dispatch(Array.prototype.slice.call(arr));
-	    },
-	    _float32array: function(arr){
-	      writeTo.write('float32array:');
-	      return this.dispatch(Array.prototype.slice.call(arr));
-	    },
-	    _float64array: function(arr){
-	      writeTo.write('float64array:');
-	      return this.dispatch(Array.prototype.slice.call(arr));
-	    },
-	    _arraybuffer: function(arr){
-	      writeTo.write('arraybuffer:');
-	      return this.dispatch(new Uint8Array(arr));
-	    },
-	    _url: function(url) {
-	      return writeTo.write('url:' + url.toString(), 'utf8');
-	    },
-	    _map: function(map) {
-	      writeTo.write('map:');
-	      var arr = Array.from(map);
-	      return this._array(arr, options.unorderedSets !== false);
-	    },
-	    _set: function(set) {
-	      writeTo.write('set:');
-	      var arr = Array.from(set);
-	      return this._array(arr, options.unorderedSets !== false);
-	    },
-	    _blob: function() {
-	      if (options.ignoreUnknown) {
-	        return writeTo.write('[blob]');
-	      }
-	      
-	      throw Error('Hashing Blob objects is currently not supported\n' +
-	        '(see https://github.com/puleos/object-hash/issues/26)\n' +
-	        'Use "options.replacer" or "options.ignoreUnknown"\n');
-	    },
-	    _domwindow: function() { return writeTo.write('domwindow'); },
-	    /* Node.js standard native objects */
-	    _process: function() { return writeTo.write('process'); },
-	    _timer: function() { return writeTo.write('timer'); },
-	    _pipe: function() { return writeTo.write('pipe'); },
-	    _tcp: function() { return writeTo.write('tcp'); },
-	    _udp: function() { return writeTo.write('udp'); },
-	    _tty: function() { return writeTo.write('tty'); },
-	    _statwatcher: function() { return writeTo.write('statwatcher'); },
-	    _securecontext: function() { return writeTo.write('securecontext'); },
-	    _connection: function() { return writeTo.write('connection'); },
-	    _zlib: function() { return writeTo.write('zlib'); },
-	    _context: function() { return writeTo.write('context'); },
-	    _nodescript: function() { return writeTo.write('nodescript'); },
-	    _httpparser: function() { return writeTo.write('httpparser'); },
-	    _dataview: function() { return writeTo.write('dataview'); },
-	    _signal: function() { return writeTo.write('signal'); },
-	    _fsevent: function() { return writeTo.write('fsevent'); },
-	    _tlswrap: function() { return writeTo.write('tlswrap'); }
-	  };
-	}
-
-	// Mini-implementation of stream.PassThrough
-	// We are far from having need for the full implementation, and we can
-	// make assumtions like "many writes, then only one final read"
-	// and we can ignore encoding specifics
-	function PassThrough() {
-	  return {
-	    buf: '',
-	    
-	    write: function(b) {
-	      this.buf += b;
-	    },
-	    end: function(b) {
-	      this.buf += b;
-	    },
-	    read: function() {
-	      return this.buf;
-	    }
-	  };
-	}
-
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(345).Buffer))
-
-/***/ },
-/* 350 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(Buffer) {var rng = __webpack_require__(351)
+	/* WEBPACK VAR INJECTION */(function(Buffer) {var rng = __webpack_require__(345)
 
 	function error () {
 	  var m = [].slice.call(arguments).join(' ')
@@ -42297,9 +42021,9 @@
 	    ].join('\n'))
 	}
 
-	exports.createHash = __webpack_require__(353)
+	exports.createHash = __webpack_require__(347)
 
-	exports.createHmac = __webpack_require__(365)
+	exports.createHmac = __webpack_require__(359)
 
 	exports.randomBytes = function(size, callback) {
 	  if (callback && callback.call) {
@@ -42320,7 +42044,7 @@
 	  return ['sha1', 'sha256', 'sha512', 'md5', 'rmd160']
 	}
 
-	var p = __webpack_require__(366)(exports)
+	var p = __webpack_require__(360)(exports)
 	exports.pbkdf2 = p.pbkdf2
 	exports.pbkdf2Sync = p.pbkdf2Sync
 
@@ -42340,16 +42064,16 @@
 	  }
 	})
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(345).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(340).Buffer))
 
 /***/ },
-/* 351 */
+/* 345 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, Buffer) {(function() {
 	  var g = ('undefined' === typeof window ? global : window) || {}
 	  _crypto = (
-	    g.crypto || g.msCrypto || __webpack_require__(352)
+	    g.crypto || g.msCrypto || __webpack_require__(346)
 	  )
 	  module.exports = function(size) {
 	    // Modern Browsers
@@ -42373,22 +42097,22 @@
 	  }
 	}())
 
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(345).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(340).Buffer))
 
 /***/ },
-/* 352 */
+/* 346 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 353 */
+/* 347 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(Buffer) {var createHash = __webpack_require__(354)
+	/* WEBPACK VAR INJECTION */(function(Buffer) {var createHash = __webpack_require__(348)
 
-	var md5 = toConstructor(__webpack_require__(362))
-	var rmd160 = toConstructor(__webpack_require__(364))
+	var md5 = toConstructor(__webpack_require__(356))
+	var rmd160 = toConstructor(__webpack_require__(358))
 
 	function toConstructor (fn) {
 	  return function () {
@@ -42416,10 +42140,10 @@
 	  return createHash(alg)
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(345).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(340).Buffer))
 
 /***/ },
-/* 354 */
+/* 348 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var exports = module.exports = function (alg) {
@@ -42428,16 +42152,16 @@
 	  return new Alg()
 	}
 
-	var Buffer = __webpack_require__(345).Buffer
-	var Hash   = __webpack_require__(355)(Buffer)
+	var Buffer = __webpack_require__(340).Buffer
+	var Hash   = __webpack_require__(349)(Buffer)
 
-	exports.sha1 = __webpack_require__(356)(Buffer, Hash)
-	exports.sha256 = __webpack_require__(360)(Buffer, Hash)
-	exports.sha512 = __webpack_require__(361)(Buffer, Hash)
+	exports.sha1 = __webpack_require__(350)(Buffer, Hash)
+	exports.sha256 = __webpack_require__(354)(Buffer, Hash)
+	exports.sha512 = __webpack_require__(355)(Buffer, Hash)
 
 
 /***/ },
-/* 355 */
+/* 349 */
 /***/ function(module, exports) {
 
 	module.exports = function (Buffer) {
@@ -42520,7 +42244,7 @@
 
 
 /***/ },
-/* 356 */
+/* 350 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -42532,7 +42256,7 @@
 	 * See http://pajhome.org.uk/crypt/md5 for details.
 	 */
 
-	var inherits = __webpack_require__(357).inherits
+	var inherits = __webpack_require__(351).inherits
 
 	module.exports = function (Buffer, Hash) {
 
@@ -42664,7 +42388,7 @@
 
 
 /***/ },
-/* 357 */
+/* 351 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -43192,7 +42916,7 @@
 	}
 	exports.isPrimitive = isPrimitive;
 
-	exports.isBuffer = __webpack_require__(358);
+	exports.isBuffer = __webpack_require__(352);
 
 	function objectToString(o) {
 	  return Object.prototype.toString.call(o);
@@ -43236,7 +42960,7 @@
 	 *     prototype.
 	 * @param {function} superCtor Constructor function to inherit prototype from.
 	 */
-	exports.inherits = __webpack_require__(359);
+	exports.inherits = __webpack_require__(353);
 
 	exports._extend = function(origin, add) {
 	  // Don't do anything if add isn't an object
@@ -43257,7 +42981,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(3)))
 
 /***/ },
-/* 358 */
+/* 352 */
 /***/ function(module, exports) {
 
 	module.exports = function isBuffer(arg) {
@@ -43268,7 +42992,7 @@
 	}
 
 /***/ },
-/* 359 */
+/* 353 */
 /***/ function(module, exports) {
 
 	if (typeof Object.create === 'function') {
@@ -43297,7 +43021,7 @@
 
 
 /***/ },
-/* 360 */
+/* 354 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -43309,7 +43033,7 @@
 	 *
 	 */
 
-	var inherits = __webpack_require__(357).inherits
+	var inherits = __webpack_require__(351).inherits
 
 	module.exports = function (Buffer, Hash) {
 
@@ -43450,10 +43174,10 @@
 
 
 /***/ },
-/* 361 */
+/* 355 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var inherits = __webpack_require__(357).inherits
+	var inherits = __webpack_require__(351).inherits
 
 	module.exports = function (Buffer, Hash) {
 	  var K = [
@@ -43700,7 +43424,7 @@
 
 
 /***/ },
-/* 362 */
+/* 356 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -43712,7 +43436,7 @@
 	 * See http://pajhome.org.uk/crypt/md5 for more info.
 	 */
 
-	var helpers = __webpack_require__(363);
+	var helpers = __webpack_require__(357);
 
 	/*
 	 * Calculate the MD5 of an array of little-endian words, and a bit length
@@ -43861,7 +43585,7 @@
 
 
 /***/ },
-/* 363 */
+/* 357 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {var intSize = 4;
@@ -43899,10 +43623,10 @@
 
 	module.exports = { hash: hash };
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(345).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(340).Buffer))
 
 /***/ },
-/* 364 */
+/* 358 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {
@@ -44111,13 +43835,13 @@
 
 
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(345).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(340).Buffer))
 
 /***/ },
-/* 365 */
+/* 359 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(Buffer) {var createHash = __webpack_require__(353)
+	/* WEBPACK VAR INJECTION */(function(Buffer) {var createHash = __webpack_require__(347)
 
 	var zeroBuffer = new Buffer(128)
 	zeroBuffer.fill(0)
@@ -44161,13 +43885,13 @@
 	}
 
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(345).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(340).Buffer))
 
 /***/ },
-/* 366 */
+/* 360 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var pbkdf2Export = __webpack_require__(367)
+	var pbkdf2Export = __webpack_require__(361)
 
 	module.exports = function (crypto, exports) {
 	  exports = exports || {}
@@ -44182,7 +43906,7 @@
 
 
 /***/ },
-/* 367 */
+/* 361 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {module.exports = function(crypto) {
@@ -44270,16 +43994,392 @@
 	  }
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(345).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(340).Buffer))
 
 /***/ },
-/* 368 */,
-/* 369 */,
-/* 370 */,
-/* 371 */,
-/* 372 */,
-/* 373 */,
-/* 374 */
+/* 362 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {var invariant = __webpack_require__(363);
+	var defaultClickRejectionStrategy = __webpack_require__(364);
+
+	var alreadyInjected = false;
+
+	module.exports = function injectTapEventPlugin (strategyOverrides) {
+	  strategyOverrides = strategyOverrides || {}
+	  var shouldRejectClick = strategyOverrides.shouldRejectClick || defaultClickRejectionStrategy;
+
+	  if (process.env.NODE_ENV !== 'production') {
+	    invariant(
+	      !alreadyInjected,
+	      'injectTapEventPlugin(): Can only be called once per application lifecycle.\n\n\
+	It is recommended to call injectTapEventPlugin() just before you call \
+	ReactDOM.render(). If you are using an external library which calls injectTapEventPlugin() \
+	itself, please contact the maintainer as it shouldn\'t be called in library code and \
+	should be injected by the application.'
+	    )
+	  }
+
+	  alreadyInjected = true;
+
+	  __webpack_require__(42).injection.injectEventPluginsByName({
+	    'TapEventPlugin':       __webpack_require__(365)(shouldRejectClick)
+	  });
+	};
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 363 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright 2013-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule invariant
+	 */
+
+	"use strict";
+
+	/**
+	 * Use invariant() to assert state which your program assumes to be true.
+	 *
+	 * Provide sprintf-style format (only %s is supported) and arguments
+	 * to provide information about what broke and what you were
+	 * expecting.
+	 *
+	 * The invariant message will be stripped in production, but the invariant
+	 * will remain to ensure logic does not differ in production.
+	 */
+
+	var invariant = function (condition, format, a, b, c, d, e, f) {
+	  if (process.env.NODE_ENV !== 'production') {
+	    if (format === undefined) {
+	      throw new Error('invariant requires an error message argument');
+	    }
+	  }
+
+	  if (!condition) {
+	    var error;
+	    if (format === undefined) {
+	      error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
+	    } else {
+	      var args = [a, b, c, d, e, f];
+	      var argIndex = 0;
+	      error = new Error('Invariant Violation: ' + format.replace(/%s/g, function () {
+	        return args[argIndex++];
+	      }));
+	    }
+
+	    error.framesToPop = 1; // we don't care about invariant's own frame
+	    throw error;
+	  }
+	};
+
+	module.exports = invariant;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 364 */
+/***/ function(module, exports) {
+
+	module.exports = function(lastTouchEvent, clickTimestamp) {
+	  if (lastTouchEvent && (clickTimestamp - lastTouchEvent) < 750) {
+	    return true;
+	  }
+	};
+
+
+/***/ },
+/* 365 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-2014 Facebook, Inc.
+	 *
+	 * Licensed under the Apache License, Version 2.0 (the "License");
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 *
+	 * http://www.apache.org/licenses/LICENSE-2.0
+	 *
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an "AS IS" BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 *
+	 * @providesModule TapEventPlugin
+	 * @typechecks static-only
+	 */
+
+	"use strict";
+
+	var EventConstants = __webpack_require__(40);
+	var EventPluginUtils = __webpack_require__(44);
+	var EventPropagators = __webpack_require__(41);
+	var SyntheticUIEvent = __webpack_require__(69);
+	var TouchEventUtils = __webpack_require__(366);
+	var ViewportMetrics = __webpack_require__(70);
+
+	var keyOf = __webpack_require__(367);
+	var topLevelTypes = EventConstants.topLevelTypes;
+
+	var isStartish = EventPluginUtils.isStartish;
+	var isEndish = EventPluginUtils.isEndish;
+
+	var isTouch = function(topLevelType) {
+	  var touchTypes = [
+	    topLevelTypes.topTouchCancel,
+	    topLevelTypes.topTouchEnd,
+	    topLevelTypes.topTouchStart,
+	    topLevelTypes.topTouchMove
+	  ];
+	  return touchTypes.indexOf(topLevelType) >= 0;
+	}
+
+	/**
+	 * Number of pixels that are tolerated in between a `touchStart` and `touchEnd`
+	 * in order to still be considered a 'tap' event.
+	 */
+	var tapMoveThreshold = 10;
+	var ignoreMouseThreshold = 750;
+	var startCoords = {x: null, y: null};
+	var lastTouchEvent = null;
+
+	var Axis = {
+	  x: {page: 'pageX', client: 'clientX', envScroll: 'currentPageScrollLeft'},
+	  y: {page: 'pageY', client: 'clientY', envScroll: 'currentPageScrollTop'}
+	};
+
+	function getAxisCoordOfEvent(axis, nativeEvent) {
+	  var singleTouch = TouchEventUtils.extractSingleTouch(nativeEvent);
+	  if (singleTouch) {
+	    return singleTouch[axis.page];
+	  }
+	  return axis.page in nativeEvent ?
+	    nativeEvent[axis.page] :
+	    nativeEvent[axis.client] + ViewportMetrics[axis.envScroll];
+	}
+
+	function getDistance(coords, nativeEvent) {
+	  var pageX = getAxisCoordOfEvent(Axis.x, nativeEvent);
+	  var pageY = getAxisCoordOfEvent(Axis.y, nativeEvent);
+	  return Math.pow(
+	    Math.pow(pageX - coords.x, 2) + Math.pow(pageY - coords.y, 2),
+	    0.5
+	  );
+	}
+
+	var touchEvents = [
+	  topLevelTypes.topTouchStart,
+	  topLevelTypes.topTouchCancel,
+	  topLevelTypes.topTouchEnd,
+	  topLevelTypes.topTouchMove,
+	];
+
+	var dependencies = [
+	  topLevelTypes.topMouseDown,
+	  topLevelTypes.topMouseMove,
+	  topLevelTypes.topMouseUp,
+	].concat(touchEvents);
+
+	var eventTypes = {
+	  touchTap: {
+	    phasedRegistrationNames: {
+	      bubbled: keyOf({onTouchTap: null}),
+	      captured: keyOf({onTouchTapCapture: null})
+	    },
+	    dependencies: dependencies
+	  }
+	};
+
+	var now = (function() {
+	  if (Date.now) {
+	    return Date.now;
+	  } else {
+	    // IE8 support: http://stackoverflow.com/questions/9430357/please-explain-why-and-how-new-date-works-as-workaround-for-date-now-in
+	    return function () {
+	      return +new Date;
+	    }
+	  }
+	})();
+
+	function createTapEventPlugin(shouldRejectClick) {
+	  return {
+
+	    tapMoveThreshold: tapMoveThreshold,
+
+	    ignoreMouseThreshold: ignoreMouseThreshold,
+
+	    eventTypes: eventTypes,
+
+	    /**
+	     * @param {string} topLevelType Record from `EventConstants`.
+	     * @param {DOMEventTarget} targetInst The listening component root node.
+	     * @param {object} nativeEvent Native browser event.
+	     * @return {*} An accumulation of synthetic events.
+	     * @see {EventPluginHub.extractEvents}
+	     */
+	    extractEvents: function(
+	      topLevelType,
+	      targetInst,
+	      nativeEvent,
+	      nativeEventTarget
+	    ) {
+
+	      if (isTouch(topLevelType)) {
+	        lastTouchEvent = now();
+	      } else {
+	        if (shouldRejectClick(lastTouchEvent, now())) {
+	          return null;
+	        }
+	      }
+
+	      if (!isStartish(topLevelType) && !isEndish(topLevelType)) {
+	        return null;
+	      }
+	      var event = null;
+	      var distance = getDistance(startCoords, nativeEvent);
+	      if (isEndish(topLevelType) && distance < tapMoveThreshold) {
+	        event = SyntheticUIEvent.getPooled(
+	          eventTypes.touchTap,
+	          targetInst,
+	          nativeEvent,
+	          nativeEventTarget
+	        );
+	      }
+	      if (isStartish(topLevelType)) {
+	        startCoords.x = getAxisCoordOfEvent(Axis.x, nativeEvent);
+	        startCoords.y = getAxisCoordOfEvent(Axis.y, nativeEvent);
+	      } else if (isEndish(topLevelType)) {
+	        startCoords.x = 0;
+	        startCoords.y = 0;
+	      }
+	      EventPropagators.accumulateTwoPhaseDispatches(event);
+	      return event;
+	    }
+
+	  };
+	}
+
+	module.exports = createTapEventPlugin;
+
+
+/***/ },
+/* 366 */
+/***/ function(module, exports) {
+
+	/**
+	 * Copyright 2013-2014 Facebook, Inc.
+	 *
+	 * Licensed under the Apache License, Version 2.0 (the "License");
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 *
+	 * http://www.apache.org/licenses/LICENSE-2.0
+	 *
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an "AS IS" BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 *
+	 * @providesModule TouchEventUtils
+	 */
+
+	var TouchEventUtils = {
+	  /**
+	   * Utility function for common case of extracting out the primary touch from a
+	   * touch event.
+	   * - `touchEnd` events usually do not have the `touches` property.
+	   *   http://stackoverflow.com/questions/3666929/
+	   *   mobile-sarai-touchend-event-not-firing-when-last-touch-is-removed
+	   *
+	   * @param {Event} nativeEvent Native event that may or may not be a touch.
+	   * @return {TouchesObject?} an object with pageX and pageY or null.
+	   */
+	  extractSingleTouch: function(nativeEvent) {
+	    var touches = nativeEvent.touches;
+	    var changedTouches = nativeEvent.changedTouches;
+	    var hasTouches = touches && touches.length > 0;
+	    var hasChangedTouches = changedTouches && changedTouches.length > 0;
+
+	    return !hasTouches && hasChangedTouches ? changedTouches[0] :
+	           hasTouches ? touches[0] :
+	           nativeEvent;
+	  }
+	};
+
+	module.exports = TouchEventUtils;
+
+
+/***/ },
+/* 367 */
+/***/ function(module, exports) {
+
+	/**
+	 * Copyright 2013-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule keyOf
+	 */
+
+	/**
+	 * Allows extraction of a minified key. Let's the build system minify keys
+	 * without losing the ability to dynamically use key strings as values
+	 * themselves. Pass in an object with a single key/val pair and it will return
+	 * you the string key of that single record. Suppose you want to grab the
+	 * value for a key 'className' inside of an object. Key/val minification may
+	 * have aliased that key to be 'xa12'. keyOf({className: null}) will return
+	 * 'xa12' in that case. Resolve keys you want to use once at startup time, then
+	 * reuse those resolutions.
+	 */
+	"use strict";
+
+	var keyOf = function (oneKeyObj) {
+	  var key;
+	  for (key in oneKeyObj) {
+	    if (!oneKeyObj.hasOwnProperty(key)) {
+	      continue;
+	    }
+	    return key;
+	  }
+	  return null;
+	};
+
+	module.exports = keyOf;
+
+/***/ },
+/* 368 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = undefined;
+
+	var _RaisedButton = __webpack_require__(369);
+
+	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _RaisedButton2.default;
+
+/***/ },
+/* 369 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -44288,13 +44388,37 @@
 	  value: true
 	});
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _simpleAssign = __webpack_require__(263);
+
+	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _transitions = __webpack_require__(270);
+
+	var _transitions2 = _interopRequireDefault(_transitions);
+
+	var _colorManipulator = __webpack_require__(176);
+
+	var _childUtils = __webpack_require__(272);
+
+	var _EnhancedButton = __webpack_require__(271);
+
+	var _EnhancedButton2 = _interopRequireDefault(_EnhancedButton);
+
+	var _Paper = __webpack_require__(312);
+
+	var _Paper2 = _interopRequireDefault(_Paper);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -44302,32 +44426,427 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var DeleteButton = function (_React$Component) {
-	  _inherits(DeleteButton, _React$Component);
+	function validateLabel(props, propName, componentName) {
+	  if (!props.children && !props.label && !props.icon) {
+	    return new Error('Required prop label or children or icon was not specified in ' + componentName + '.');
+	  }
+	}
 
-	  function DeleteButton() {
-	    _classCallCheck(this, DeleteButton);
+	function getStyles(props, context, state) {
+	  var _context$muiTheme = context.muiTheme;
+	  var baseTheme = _context$muiTheme.baseTheme;
+	  var button = _context$muiTheme.button;
+	  var raisedButton = _context$muiTheme.raisedButton;
+	  var disabled = props.disabled;
+	  var disabledBackgroundColor = props.disabledBackgroundColor;
+	  var disabledLabelColor = props.disabledLabelColor;
+	  var fullWidth = props.fullWidth;
+	  var icon = props.icon;
+	  var label = props.label;
+	  var labelPosition = props.labelPosition;
+	  var primary = props.primary;
+	  var secondary = props.secondary;
+	  var style = props.style;
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(DeleteButton).apply(this, arguments));
+
+	  var amount = primary || secondary ? 0.4 : 0.08;
+
+	  var backgroundColor = raisedButton.color;
+	  var labelColor = raisedButton.textColor;
+
+	  if (disabled) {
+	    backgroundColor = disabledBackgroundColor || raisedButton.disabledColor;
+	    labelColor = disabledLabelColor || raisedButton.disabledTextColor;
+	  } else if (primary) {
+	    backgroundColor = raisedButton.primaryColor;
+	    labelColor = raisedButton.primaryTextColor;
+	  } else if (secondary) {
+	    backgroundColor = raisedButton.secondaryColor;
+	    labelColor = raisedButton.secondaryTextColor;
+	  } else {
+	    if (props.backgroundColor) {
+	      backgroundColor = props.backgroundColor;
+	    }
+	    if (props.labelColor) {
+	      labelColor = props.labelColor;
+	    }
 	  }
 
-	  _createClass(DeleteButton, [{
-	    key: 'handleDelete',
-	    value: function handleDelete(e) {}
+	  var buttonHeight = style && style.height || button.height + 'px';
+
+	  return {
+	    root: {
+	      display: 'inline-block',
+	      minWidth: fullWidth ? '100%' : button.minWidth,
+	      height: buttonHeight,
+	      transition: _transitions2.default.easeOut()
+	    },
+	    container: {
+	      lineHeight: buttonHeight,
+	      position: 'relative',
+	      height: '100%',
+	      width: '100%',
+	      padding: 0,
+	      overflow: 'hidden',
+	      borderRadius: 2,
+	      transition: _transitions2.default.easeOut(),
+	      backgroundColor: backgroundColor,
+	      // That's the default value for a button but not a link
+	      textAlign: 'center'
+	    },
+	    label: {
+	      position: 'relative',
+	      verticalAlign: 'middle',
+	      opacity: 1,
+	      fontSize: '14px',
+	      letterSpacing: 0,
+	      textTransform: raisedButton.textTransform || button.textTransform || 'uppercase',
+	      fontWeight: raisedButton.fontWeight,
+	      margin: 0,
+	      userSelect: 'none',
+	      paddingLeft: icon && labelPosition !== 'before' ? 8 : baseTheme.spacing.desktopGutterLess,
+	      paddingRight: icon && labelPosition === 'before' ? 8 : baseTheme.spacing.desktopGutterLess,
+	      color: labelColor
+	    },
+	    icon: {
+	      verticalAlign: 'middle',
+	      marginLeft: label && labelPosition !== 'before' ? 12 : 0,
+	      marginRight: label && labelPosition === 'before' ? 12 : 0
+	    },
+	    overlay: {
+	      height: buttonHeight,
+	      backgroundColor: (state.keyboardFocused || state.hovered) && !disabled && (0, _colorManipulator.fade)(labelColor, amount),
+	      transition: _transitions2.default.easeOut(),
+	      top: 0
+	    },
+	    ripple: {
+	      color: labelColor,
+	      opacity: !(primary || secondary) ? 0.1 : 0.16
+	    }
+	  };
+	}
+
+	var RaisedButton = function (_React$Component) {
+	  _inherits(RaisedButton, _React$Component);
+
+	  function RaisedButton() {
+	    var _Object$getPrototypeO;
+
+	    var _temp, _this, _ret;
+
+	    _classCallCheck(this, RaisedButton);
+
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(RaisedButton)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
+	      hovered: false,
+	      touched: false,
+	      initialZDepth: 0,
+	      zDepth: 0
+	    }, _this.handleMouseDown = function (event) {
+	      // only listen to left clicks
+	      if (event.button === 0) {
+	        _this.setState({ zDepth: _this.state.initialZDepth + 1 });
+	      }
+	      if (_this.props.onMouseDown) _this.props.onMouseDown(event);
+	    }, _this.handleMouseUp = function (event) {
+	      _this.setState({ zDepth: _this.state.initialZDepth });
+	      if (_this.props.onMouseUp) _this.props.onMouseUp(event);
+	    }, _this.handleMouseLeave = function (event) {
+	      if (!_this.refs.container.isKeyboardFocused()) _this.setState({ zDepth: _this.state.initialZDepth, hovered: false });
+	      if (_this.props.onMouseLeave) _this.props.onMouseLeave(event);
+	    }, _this.handleMouseEnter = function (event) {
+	      if (!_this.refs.container.isKeyboardFocused() && !_this.state.touch) {
+	        _this.setState({ hovered: true });
+	      }
+	      if (_this.props.onMouseEnter) _this.props.onMouseEnter(event);
+	    }, _this.handleTouchStart = function (event) {
+	      _this.setState({
+	        touch: true,
+	        zDepth: _this.state.initialZDepth + 1
+	      });
+	      if (_this.props.onTouchStart) _this.props.onTouchStart(event);
+	    }, _this.handleTouchEnd = function (event) {
+	      _this.setState({ zDepth: _this.state.initialZDepth });
+	      if (_this.props.onTouchEnd) _this.props.onTouchEnd(event);
+	    }, _this.handleKeyboardFocus = function (event, keyboardFocused) {
+	      var zDepth = keyboardFocused && !_this.props.disabled ? _this.state.initialZDepth + 1 : _this.state.initialZDepth;
+
+	      _this.setState({
+	        zDepth: zDepth,
+	        keyboardFocused: keyboardFocused
+	      });
+	    }, _temp), _possibleConstructorReturn(_this, _ret);
+	  }
+
+	  _createClass(RaisedButton, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var zDepth = this.props.disabled ? 0 : 1;
+	      this.setState({
+	        zDepth: zDepth,
+	        initialZDepth: zDepth
+	      });
+	    }
+	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      var zDepth = nextProps.disabled ? 0 : 1;
+	      this.setState({
+	        zDepth: zDepth,
+	        initialZDepth: zDepth
+	      });
+	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _props = this.props;
+	      var children = _props.children;
+	      var className = _props.className;
+	      var disabled = _props.disabled;
+	      var icon = _props.icon;
+	      var label = _props.label;
+	      var labelPosition = _props.labelPosition;
+	      var labelStyle = _props.labelStyle;
+	      var primary = _props.primary;
+	      var // eslint-disable-line no-unused-vars
+	      rippleStyle = _props.rippleStyle;
+	      var secondary = _props.secondary;
 
-	      return _react2.default.createElement('div', null);
+	      var other = _objectWithoutProperties(_props, ['children', 'className', 'disabled', 'icon', 'label', 'labelPosition', 'labelStyle', 'primary', 'rippleStyle', 'secondary']);
+
+	      var prepareStyles = this.context.muiTheme.prepareStyles;
+
+	      var styles = getStyles(this.props, this.context, this.state);
+	      var mergedRippleStyles = (0, _simpleAssign2.default)({}, styles.ripple, rippleStyle);
+
+	      var buttonEventHandlers = disabled ? {} : {
+	        onMouseDown: this.handleMouseDown,
+	        onMouseUp: this.handleMouseUp,
+	        onMouseLeave: this.handleMouseLeave,
+	        onMouseEnter: this.handleMouseEnter,
+	        onTouchStart: this.handleTouchStart,
+	        onTouchEnd: this.handleTouchEnd,
+	        onKeyboardFocus: this.handleKeyboardFocus
+	      };
+
+	      var labelElement = label && _react2.default.createElement(
+	        'span',
+	        { style: prepareStyles((0, _simpleAssign2.default)(styles.label, labelStyle)) },
+	        label
+	      );
+
+	      var iconCloned = icon && _react2.default.cloneElement(icon, {
+	        color: styles.label.color,
+	        style: styles.icon
+	      });
+
+	      // Place label before or after children.
+	      var childrenFragment = labelPosition === 'before' ? {
+	        labelElement: labelElement,
+	        iconCloned: iconCloned,
+	        children: children
+	      } : {
+	        children: children,
+	        iconCloned: iconCloned,
+	        labelElement: labelElement
+	      };
+
+	      var enhancedButtonChildren = (0, _childUtils.createChildFragment)(childrenFragment);
+
+	      return _react2.default.createElement(
+	        _Paper2.default,
+	        {
+	          className: className,
+	          style: (0, _simpleAssign2.default)(styles.root, this.props.style),
+	          zDepth: this.state.zDepth
+	        },
+	        _react2.default.createElement(
+	          _EnhancedButton2.default,
+	          _extends({}, other, buttonEventHandlers, {
+	            ref: 'container',
+	            disabled: disabled,
+	            style: styles.container,
+	            focusRippleColor: mergedRippleStyles.color,
+	            touchRippleColor: mergedRippleStyles.color,
+	            focusRippleOpacity: mergedRippleStyles.opacity,
+	            touchRippleOpacity: mergedRippleStyles.opacity
+	          }),
+	          _react2.default.createElement(
+	            'div',
+	            {
+	              ref: 'overlay',
+	              style: prepareStyles(styles.overlay)
+	            },
+	            enhancedButtonChildren
+	          )
+	        )
+	      );
 	    }
 	  }]);
 
-	  return DeleteButton;
+	  return RaisedButton;
 	}(_react2.default.Component);
 
-	;
+	RaisedButton.muiName = 'RaisedButton';
+	RaisedButton.propTypes = {
+	  /**
+	   * Override the default background color for the button,
+	   * but not the default disabled background color
+	   * (use `disabledBackgroundColor` for this).
+	   */
+	  backgroundColor: _react2.default.PropTypes.string,
 
-	exports.default = DeleteButton;
+	  /**
+	   * The content of the button.
+	   * If a label is provided via the `label` prop, the text within the label
+	   * will be displayed in addition to the content provided here.
+	   */
+	  children: _react2.default.PropTypes.node,
+
+	  /**
+	   * The CSS class name of the root element.
+	   */
+	  className: _react2.default.PropTypes.string,
+
+	  /**
+	   * If true, the button will be disabled.
+	   */
+	  disabled: _react2.default.PropTypes.bool,
+
+	  /**
+	   * Override the default background color for the button
+	   * when it is disabled.
+	   */
+	  disabledBackgroundColor: _react2.default.PropTypes.string,
+
+	  /**
+	   * The color of the button's label when the button is disabled.
+	   */
+	  disabledLabelColor: _react2.default.PropTypes.string,
+
+	  /**
+	   * If true, the button will take up the full width of its container.
+	   */
+	  fullWidth: _react2.default.PropTypes.bool,
+
+	  /**
+	   * If `linkButton` is true, the URL to link to when the button
+	   * is clicked.
+	   */
+	  href: _react2.default.PropTypes.string,
+
+	  /**
+	   * An icon to be displayed within the button.
+	   */
+	  icon: _react2.default.PropTypes.node,
+
+	  /**
+	   * The label to be displayed within the button.
+	   * If content is provided via the `children` prop, that content will be
+	   * displayed in addition to the label provided here.
+	   */
+	  label: validateLabel,
+
+	  /**
+	   * The color of the button's label.
+	   */
+	  labelColor: _react2.default.PropTypes.string,
+
+	  /**
+	   * The position of the button's label relative to the button's `children`.
+	   */
+	  labelPosition: _react2.default.PropTypes.oneOf(['before', 'after']),
+
+	  /**
+	   * Override the inline-styles of the button's label element.
+	   */
+	  labelStyle: _react2.default.PropTypes.object,
+
+	  /**
+	   * If true, enable the use of the `href` property to provide
+	   * a URL to link to.
+	   */
+	  linkButton: _react2.default.PropTypes.bool,
+
+	  /**
+	   * Callback function fired when a mouse button is pressed down on
+	   * the element.
+	   *
+	   * @param {object} event `mousedown` event targeting the element.
+	   */
+	  onMouseDown: _react2.default.PropTypes.func,
+
+	  /**
+	   * Callback function fired when the mouse enters the element.
+	   *
+	   * @param {object} event `mouseenter` event targeting the element.
+	   */
+	  onMouseEnter: _react2.default.PropTypes.func,
+
+	  /**
+	   * Callback function fired when the mouse leaves the element.
+	   *
+	   * @param {object} event `mouseleave` event targeting the element.
+	   */
+	  onMouseLeave: _react2.default.PropTypes.func,
+
+	  /**
+	   * Callback function fired when a mouse button is released on the element.
+	   *
+	   * @param {object} event `mouseup` event targeting the element.
+	   */
+	  onMouseUp: _react2.default.PropTypes.func,
+
+	  /**
+	   * Callback function fired when a touch point is removed from the element.
+	   *
+	   * @param {object} event `touchend` event targeting the element.
+	   */
+	  onTouchEnd: _react2.default.PropTypes.func,
+
+	  /**
+	   * Callback function fired when the element is touched.
+	   *
+	   * @param {object} event `touchstart` event targeting the element.
+	   */
+	  onTouchStart: _react2.default.PropTypes.func,
+
+	  /**
+	   * If true, the button will use the theme's primary color.
+	   */
+	  primary: _react2.default.PropTypes.bool,
+
+	  /**
+	   * Override the inline style of the ripple element.
+	   */
+	  rippleStyle: _react2.default.PropTypes.object,
+
+	  /**
+	   * If true, the button will use the theme's secondary color.
+	   * If both `secondary` and `primary` are true, the button will use
+	   * the theme's primary color.
+	   */
+	  secondary: _react2.default.PropTypes.bool,
+
+	  /**
+	   * Override the inline-styles of the root element.
+	   */
+	  style: _react2.default.PropTypes.object
+	};
+	RaisedButton.defaultProps = {
+	  disabled: false,
+	  labelPosition: 'after',
+	  fullWidth: false,
+	  primary: false,
+	  secondary: false
+	};
+	RaisedButton.contextTypes = {
+	  muiTheme: _react2.default.PropTypes.object.isRequired
+	};
+	exports.default = RaisedButton;
 
 /***/ }
 /******/ ]);
