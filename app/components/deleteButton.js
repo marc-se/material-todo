@@ -15,8 +15,25 @@ const styles = {
 };
 
 class DeleteButton extends React.Component {
-  handleDelete(e) {
+  handleDelete(data) {
   	console.log("delete!");
+  	var updateData = [];
+
+  	// deletes checked items and 
+  	// returns array with all unchecked items
+  	for (let item of data) {
+  		if (!item.checked) {
+  			updateData.push(item);
+  		} else {
+  			// update localstorage
+  			this.props.storage.removeItem(item.key);
+  		}
+  	}
+
+  	console.log("BEFORE UPDATE:", data);
+  	console.log("AFTER UPDATE:", updateData);
+
+  	this.props.updateStatus(updateData);
   }
   render() {
     return(
@@ -24,7 +41,7 @@ class DeleteButton extends React.Component {
 	    <RaisedButton
 	      label="delete selected items"
 	      linkButton={false}
-	      onClick={ (e) => this.handleDelete(e) }
+	      onClick={ (e) => this.handleDelete(this.props.data) }
 	      style={styles.button}
 	      icon={<FontIcon className="material-icons">delete</FontIcon>}
 	      backgroundColor={grey100}

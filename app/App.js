@@ -6,7 +6,6 @@ import TodoList from './components/todoList';
 import TodoInput from './components/todoInput';
 import DeleteButton from './components/deleteButton';
 import hash from 'object-hash';
-//var hash = require('object-hash');
 
 var storage = localStorage;
 
@@ -108,7 +107,10 @@ class App extends React.Component {
 
 		this.setState({data: updateData, fuzzySearch: updateFuzzySearch});
     }
-    updateStatus(data, checked) {
+    updateStatus(data) {
+
+    	console.log("UPDATE!");
+
     	var updateData = [];
 
     	for (let item of data) {
@@ -123,13 +125,13 @@ class App extends React.Component {
 				<div className="col-md-2"></div>
 		    	<div className="col-md-8">
 					<MuiThemeProvider muiTheme={ getMuiTheme() } >
-				    	<TodoList data={ this.state.data } storage={ storage } updateStatus={ (data, checked) => this.updateStatus(this.state.data, checked)} />
+				    	<TodoList data={ this.state.data } storage={ storage } updateStatus={ (data) => this.updateStatus(this.state.data)} />
 				  	</MuiThemeProvider>
 				  	<MuiThemeProvider muiTheme={ getMuiTheme() } >
 				    	<TodoInput addItem={ (e) => this.addItem(e) } fuzzySearch={ this.state.fuzzySearch } />
 				  	</MuiThemeProvider>
 				  	<MuiThemeProvider muiTheme={ getMuiTheme() } >
-				  		<DeleteButton data={ this.state.data } />
+				  		<DeleteButton data={ this.state.data } storage={ storage } updateStatus={ (data) => this.updateStatus(data)} />
 				  	</MuiThemeProvider>
 			  	</div>
 			  	<div className="col-md-2"></div>

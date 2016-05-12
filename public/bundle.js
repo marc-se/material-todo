@@ -88,8 +88,6 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	//var hash = require('object-hash');
-
 	var storage = localStorage;
 
 	// var item1 = {key: 0, text: "Wäsche waschen", subtext: "aber noch heute", newItem: true, checked: false};
@@ -244,7 +242,10 @@
 			}
 		}, {
 			key: 'updateStatus',
-			value: function updateStatus(data, checked) {
+			value: function updateStatus(data) {
+
+				console.log("UPDATE!");
+
 				var updateData = [];
 
 				var _iteratorNormalCompletion3 = true;
@@ -289,8 +290,8 @@
 						_react2.default.createElement(
 							_MuiThemeProvider2.default,
 							{ muiTheme: (0, _getMuiTheme2.default)() },
-							_react2.default.createElement(_todoList2.default, { data: this.state.data, storage: storage, updateStatus: function updateStatus(data, checked) {
-									return _this2.updateStatus(_this2.state.data, checked);
+							_react2.default.createElement(_todoList2.default, { data: this.state.data, storage: storage, updateStatus: function updateStatus(data) {
+									return _this2.updateStatus(_this2.state.data);
 								} })
 						),
 						_react2.default.createElement(
@@ -303,7 +304,9 @@
 						_react2.default.createElement(
 							_MuiThemeProvider2.default,
 							{ muiTheme: (0, _getMuiTheme2.default)() },
-							_react2.default.createElement(_deleteButton2.default, { data: this.state.data })
+							_react2.default.createElement(_deleteButton2.default, { data: this.state.data, storage: storage, updateStatus: function updateStatus(data) {
+									return _this2.updateStatus(data);
+								} })
 						)
 					),
 					_react2.default.createElement('div', { className: 'col-md-2' })
@@ -29130,7 +29133,7 @@
 				}
 
 				this.props.storage.setItem(e.key, JSON.stringify(e));
-				this.props.updateStatus(this.props.data, checked);
+				this.props.updateStatus(this.props.data);
 			}
 		}, {
 			key: 'render',
@@ -39753,8 +39756,46 @@
 
 	  _createClass(DeleteButton, [{
 	    key: 'handleDelete',
-	    value: function handleDelete(e) {
+	    value: function handleDelete(data) {
 	      console.log("delete!");
+	      var updateData = [];
+
+	      // deletes checked items and
+	      // returns array with all unchecked items
+	      var _iteratorNormalCompletion = true;
+	      var _didIteratorError = false;
+	      var _iteratorError = undefined;
+
+	      try {
+	        for (var _iterator = data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	          var item = _step.value;
+
+	          if (!item.checked) {
+	            updateData.push(item);
+	          } else {
+	            // update localstorage
+	            this.props.storage.removeItem(item.key);
+	          }
+	        }
+	      } catch (err) {
+	        _didIteratorError = true;
+	        _iteratorError = err;
+	      } finally {
+	        try {
+	          if (!_iteratorNormalCompletion && _iterator.return) {
+	            _iterator.return();
+	          }
+	        } finally {
+	          if (_didIteratorError) {
+	            throw _iteratorError;
+	          }
+	        }
+	      }
+
+	      console.log("BEFORE UPDATE:", data);
+	      console.log("AFTER UPDATE:", updateData);
+
+	      this.props.updateStatus(updateData);
 	    }
 	  }, {
 	    key: 'render',
@@ -39768,7 +39809,7 @@
 	          label: 'delete selected items',
 	          linkButton: false,
 	          onClick: function onClick(e) {
-	            return _this2.handleDelete(e);
+	            return _this2.handleDelete(_this2.props.data);
 	          },
 	          style: styles.button,
 	          icon: _react2.default.createElement(

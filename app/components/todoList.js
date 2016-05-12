@@ -22,7 +22,7 @@ class TodoList extends React.Component {
   	}
 
   	this.props.storage.setItem(e.key, JSON.stringify(e));
-  	this.props.updateStatus(this.props.data, checked);
+  	this.props.updateStatus(this.props.data);
   }
   render() {
 	var items = this.props.data.map( (item) => {
