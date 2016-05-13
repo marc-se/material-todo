@@ -285,7 +285,7 @@
 							_react2.default.createElement(
 								'div',
 								null,
-								_react2.default.createElement(_headerBadge2.default, null),
+								_react2.default.createElement(_headerBadge2.default, { count: this.state.data.length }),
 								_react2.default.createElement(
 									'h1',
 									null,
@@ -44925,14 +44925,14 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var HeaderBadge = function HeaderBadge() {
+	var HeaderBadge = function HeaderBadge(props) {
 	  return _react2.default.createElement(
 	    'div',
 	    null,
 	    _react2.default.createElement(
 	      _Badge2.default,
 	      {
-	        badgeContent: 10,
+	        badgeContent: props.count,
 	        secondary: true,
 	        badgeStyle: { top: 12, right: 12 }
 	      },

@@ -42,9 +42,9 @@ class DeleteButton extends React.Component {
 	      label="delete selected items"
 	      linkButton={false}
 	      onClick={ (e) => this.handleDelete(this.props.data) }
-	      style={styles.button}
-	      icon={<FontIcon className="material-icons">delete</FontIcon>}
-	      backgroundColor={grey100}
+	      style={ styles.button }
+	      icon={ <FontIcon className="material-icons">delete</FontIcon> }
+	      backgroundColor={ grey100 }
 	    />
       </div>
     );

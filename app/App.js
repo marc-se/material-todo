@@ -115,7 +115,7 @@ class App extends React.Component {
 		    	<div className="col-md-8">
 		    		<MuiThemeProvider muiTheme={ getMuiTheme() } >
 				    	<div>
-				    		<HeaderBadge />
+				    		<HeaderBadge count={ this.state.data.length } />
 				    		<h1>Get it done!</h1>
 				    		<h2>Hey, seems like you have something to do</h2>
 				    	</div>
