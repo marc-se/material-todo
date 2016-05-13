@@ -64,6 +64,10 @@
 
 	var _MuiThemeProvider2 = _interopRequireDefault(_MuiThemeProvider);
 
+	var _headerBadge = __webpack_require__(370);
+
+	var _headerBadge2 = _interopRequireDefault(_headerBadge);
+
 	var _todoList = __webpack_require__(260);
 
 	var _todoList2 = _interopRequireDefault(_todoList);
@@ -89,14 +93,6 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var storage = localStorage;
-
-	// var item1 = {key: 0, text: "Wäsche waschen", subtext: "aber noch heute", newItem: true, checked: false};
-	// var item2 = {key: 1, text: "Irgendwas neues lernen", subtext: "morgen gleich", newItem: true, checked: false};
-	// var item3 = {key: 2, text: "Hoffentlich klappt das alles", subtext: "juhu!", newItem: true, checked: false};
-
-	// storage.setItem(hash(item1), JSON.stringify(item1));
-	// storage.setItem(hash(item2), JSON.stringify(item2));
-	// storage.setItem(hash(item3), JSON.stringify(item3));
 
 	var data = [],
 	    fuzzySearch = [''];
@@ -171,9 +167,8 @@
 			value: function syncStorage(local_storage, tmp_data_storage, fuzzy_storage) {
 				for (var item in local_storage) {
 					if (item !== "FUZZY_SEARCH") {
-						tmp_data_storage.push(local_storage.getItem(item));
+						tmp_data_storage.push(JSON.parse(local_storage.getItem(item)));
 					} else if (fuzzy_storage !== 'undefined') {
-						// fuzzy_storage = storage.getItem('FUZZY_SEARCH').split(',');
 						storage.setItem('FUZZY_SEARCH', fuzzy_storage);
 
 						var _iteratorNormalCompletion2 = true;
@@ -243,9 +238,6 @@
 		}, {
 			key: 'updateStatus',
 			value: function updateStatus(data) {
-
-				console.log("UPDATE!");
-
 				var updateData = [];
 
 				var _iteratorNormalCompletion3 = true;
@@ -287,6 +279,25 @@
 					_react2.default.createElement(
 						'div',
 						{ className: 'col-md-8' },
+						_react2.default.createElement(
+							_MuiThemeProvider2.default,
+							{ muiTheme: (0, _getMuiTheme2.default)() },
+							_react2.default.createElement(
+								'div',
+								null,
+								_react2.default.createElement(_headerBadge2.default, null),
+								_react2.default.createElement(
+									'h1',
+									null,
+									'Get it done!'
+								),
+								_react2.default.createElement(
+									'h2',
+									null,
+									'Hey, seems like you have something to do'
+								)
+							)
+						),
 						_react2.default.createElement(
 							_MuiThemeProvider2.default,
 							{ muiTheme: (0, _getMuiTheme2.default)() },
@@ -29142,9 +29153,6 @@
 
 				var items = this.props.data.map(function (item) {
 
-					// parse localstorage item and convert string back to JSON
-					//let todo = JSON.parse(item);
-
 					console.log(item.checked);
 
 					return _react2.default.createElement(_List.ListItem, {
@@ -44888,6 +44896,278 @@
 	  muiTheme: _react2.default.PropTypes.object.isRequired
 	};
 	exports.default = RaisedButton;
+
+/***/ },
+/* 370 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Badge = __webpack_require__(371);
+
+	var _Badge2 = _interopRequireDefault(_Badge);
+
+	var _IconButton = __webpack_require__(289);
+
+	var _IconButton2 = _interopRequireDefault(_IconButton);
+
+	var _notifications = __webpack_require__(373);
+
+	var _notifications2 = _interopRequireDefault(_notifications);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var HeaderBadge = function HeaderBadge() {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      _Badge2.default,
+	      {
+	        badgeContent: 10,
+	        secondary: true,
+	        badgeStyle: { top: 12, right: 12 }
+	      },
+	      _react2.default.createElement(
+	        _IconButton2.default,
+	        { tooltip: 'You have some things to do!' },
+	        _react2.default.createElement(_notifications2.default, null)
+	      )
+	    )
+	  );
+	};
+
+	exports.default = HeaderBadge;
+
+/***/ },
+/* 371 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = undefined;
+
+	var _Badge = __webpack_require__(372);
+
+	var _Badge2 = _interopRequireDefault(_Badge);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _Badge2.default;
+
+/***/ },
+/* 372 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _simpleAssign = __webpack_require__(263);
+
+	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	function getStyles(props, context) {
+	  var primary = props.primary;
+	  var secondary = props.secondary;
+	  var badge = context.muiTheme.badge;
+
+
+	  var badgeBackgroundColor = void 0;
+	  var badgeTextColor = void 0;
+
+	  if (primary) {
+	    badgeBackgroundColor = badge.primaryColor;
+	    badgeTextColor = badge.primaryTextColor;
+	  } else if (secondary) {
+	    badgeBackgroundColor = badge.secondaryColor;
+	    badgeTextColor = badge.secondaryTextColor;
+	  } else {
+	    badgeBackgroundColor = badge.color;
+	    badgeTextColor = badge.textColor;
+	  }
+
+	  var radius = 12;
+	  var radius2x = Math.floor(2 * radius);
+
+	  return {
+	    root: {
+	      position: 'relative',
+	      display: 'inline-block',
+	      padding: radius2x + 'px ' + radius2x + 'px ' + radius + 'px ' + radius + 'px'
+	    },
+	    badge: {
+	      display: 'flex',
+	      flexDirection: 'row',
+	      flexWrap: 'wrap',
+	      justifyContent: 'center',
+	      alignContent: 'center',
+	      alignItems: 'center',
+	      position: 'absolute',
+	      top: 0,
+	      right: 0,
+	      fontWeight: badge.fontWeight,
+	      fontSize: radius,
+	      width: radius2x,
+	      height: radius2x,
+	      borderRadius: '50%',
+	      backgroundColor: badgeBackgroundColor,
+	      color: badgeTextColor
+	    }
+	  };
+	}
+
+	var Badge = function (_React$Component) {
+	  _inherits(Badge, _React$Component);
+
+	  function Badge() {
+	    _classCallCheck(this, Badge);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Badge).apply(this, arguments));
+	  }
+
+	  _createClass(Badge, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var style = _props.style;
+	      var children = _props.children;
+	      var badgeContent = _props.badgeContent;
+	      var badgeStyle = _props.badgeStyle;
+
+	      var other = _objectWithoutProperties(_props, ['style', 'children', 'badgeContent', 'badgeStyle']);
+
+	      var prepareStyles = this.context.muiTheme.prepareStyles;
+
+	      var styles = getStyles(this.props, this.context);
+
+	      return _react2.default.createElement(
+	        'div',
+	        _extends({}, other, { style: prepareStyles((0, _simpleAssign2.default)({}, styles.root, style)) }),
+	        children,
+	        _react2.default.createElement(
+	          'span',
+	          { style: prepareStyles((0, _simpleAssign2.default)({}, styles.badge, badgeStyle)) },
+	          badgeContent
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Badge;
+	}(_react2.default.Component);
+
+	Badge.propTypes = {
+	  /**
+	   * This is the content rendered within the badge.
+	   */
+	  badgeContent: _react2.default.PropTypes.node.isRequired,
+
+	  /**
+	   * Override the inline-styles of the badge element.
+	   */
+	  badgeStyle: _react2.default.PropTypes.object,
+
+	  /**
+	   * The badge will be added relativelty to this node.
+	   */
+	  children: _react2.default.PropTypes.node,
+
+	  /**
+	   * The css class name of the root element.
+	   */
+	  className: _react2.default.PropTypes.string,
+
+	  /**
+	   * If true, the badge will use the primary badge colors.
+	   */
+	  primary: _react2.default.PropTypes.bool,
+
+	  /**
+	   * If true, the badge will use the secondary badge colors.
+	   */
+	  secondary: _react2.default.PropTypes.bool,
+
+	  /**
+	   * Override the inline-styles of the root element.
+	   */
+	  style: _react2.default.PropTypes.object
+	};
+	Badge.defaultProps = {
+	  primary: false,
+	  secondary: false
+	};
+	Badge.contextTypes = {
+	  muiTheme: _react2.default.PropTypes.object.isRequired
+	};
+	exports.default = Badge;
+
+/***/ },
+/* 373 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _pure = __webpack_require__(295);
+
+	var _pure2 = _interopRequireDefault(_pure);
+
+	var _SvgIcon = __webpack_require__(303);
+
+	var _SvgIcon2 = _interopRequireDefault(_SvgIcon);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var SocialNotifications = function SocialNotifications(props) {
+	  return _react2.default.createElement(
+	    _SvgIcon2.default,
+	    props,
+	    _react2.default.createElement('path', { d: 'M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z' })
+	  );
+	};
+	SocialNotifications = (0, _pure2.default)(SocialNotifications);
+	SocialNotifications.displayName = 'SocialNotifications';
+
+	exports.default = SocialNotifications;
 
 /***/ }
 /******/ ]);

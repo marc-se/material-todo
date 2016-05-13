@@ -2,20 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import HeaderBadge from './components/headerBadge';
 import TodoList from './components/todoList';
 import TodoInput from './components/todoInput';
 import DeleteButton from './components/deleteButton';
 import hash from 'object-hash';
 
 var storage = localStorage;
-
-// var item1 = {key: 0, text: "Wäsche waschen", subtext: "aber noch heute", newItem: true, checked: false};
-// var item2 = {key: 1, text: "Irgendwas neues lernen", subtext: "morgen gleich", newItem: true, checked: false};
-// var item3 = {key: 2, text: "Hoffentlich klappt das alles", subtext: "juhu!", newItem: true, checked: false};
-
-// storage.setItem(hash(item1), JSON.stringify(item1));
-// storage.setItem(hash(item2), JSON.stringify(item2));
-// storage.setItem(hash(item3), JSON.stringify(item3));
 
 var data = [],
 	fuzzySearch = [''];
@@ -61,9 +54,8 @@ class App extends React.Component {
     syncStorage(local_storage, tmp_data_storage, fuzzy_storage) {
 		for (let item in local_storage) {
 			if (item !== "FUZZY_SEARCH") {
-				tmp_data_storage.push(local_storage.getItem(item));
+				tmp_data_storage.push(JSON.parse(local_storage.getItem(item)));
 			} else if (fuzzy_storage !== 'undefined'){
-				// fuzzy_storage = storage.getItem('FUZZY_SEARCH').split(',');
 				storage.setItem('FUZZY_SEARCH', fuzzy_storage);
 
 				for (let item of fuzzy_storage) {
@@ -108,9 +100,6 @@ class App extends React.Component {
 		this.setState({data: updateData, fuzzySearch: updateFuzzySearch});
     }
     updateStatus(data) {
-
-    	console.log("UPDATE!");
-
     	var updateData = [];
 
     	for (let item of data) {
@@ -124,6 +113,13 @@ class App extends React.Component {
 			<div className='container'>
 				<div className="col-md-2"></div>
 		    	<div className="col-md-8">
+		    		<MuiThemeProvider muiTheme={ getMuiTheme() } >
+				    	<div>
+				    		<HeaderBadge />
+				    		<h1>Get it done!</h1>
+				    		<h2>Hey, seems like you have something to do</h2>
+				    	</div>
+				  	</MuiThemeProvider>
 					<MuiThemeProvider muiTheme={ getMuiTheme() } >
 				    	<TodoList data={ this.state.data } storage={ storage } updateStatus={ (data) => this.updateStatus(this.state.data)} />
 				  	</MuiThemeProvider>

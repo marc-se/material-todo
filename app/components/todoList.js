@@ -26,9 +26,6 @@ class TodoList extends React.Component {
   }
   render() {
 	var items = this.props.data.map( (item) => {
-		
-		// parse localstorage item and convert string back to JSON
-		//let todo = JSON.parse(item);
 
 		console.log(item.checked);
 
