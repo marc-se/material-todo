@@ -29153,8 +29153,6 @@
 
 				var items = this.props.data.map(function (item) {
 
-					console.log(item.checked);
-
 					return _react2.default.createElement(_List.ListItem, {
 						leftCheckbox: _react2.default.createElement(_Checkbox2.default, { defaultChecked: item.checked, onCheck: function onCheck(e, checked) {
 								return _this2.itemStatus(item, checked);
@@ -35105,6 +35103,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactDom = __webpack_require__(33);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
 	var _AutoComplete = __webpack_require__(317);
 
 	var _AutoComplete2 = _interopRequireDefault(_AutoComplete);
@@ -35123,18 +35125,35 @@
 	  function TodoInput() {
 	    _classCallCheck(this, TodoInput);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(TodoInput).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TodoInput).call(this));
+
+	    _this.state = {
+	      inputText: ''
+	    };
+	    return _this;
 	  }
 
 	  _createClass(TodoInput, [{
+	    key: 'handleUpdate',
+	    value: function handleUpdate(e) {
+	      this.setState({ inputText: e });
+	    }
+	  }, {
 	    key: 'handleSubmit',
-	    value: function handleSubmit(e) {
-	      var item = e.trim();
+	    value: function handleSubmit(e, i) {
+	      if (i == -1) {
+	        var item = e.trim();
 
-	      if (item !== "") {
-	        this.props.addItem(item);
-	      } else {
-	        return null;
+	        if (item !== '') {
+	          this.props.addItem(item);
+	        } else {
+	          return null;
+	        }
+
+	        // necessary because of not clearing textfield when input is selected from autocomplete list
+	        // seems like onUpdateInput has a slight delay
+	        // setTimeout( () => this.setState({inputText: ''}), 350);
+	        this.setState({ inputText: '' });
 	      }
 	    }
 	  }, {
@@ -35148,9 +35167,14 @@
 	        dataSource: this.props.fuzzySearch,
 	        maxSearchResults: 5,
 	        fullWidth: true,
-	        onNewRequest: function onNewRequest(e) {
-	          return _this2.handleSubmit(e);
-	        }
+	        searchText: this.state.inputText,
+	        onUpdateInput: function onUpdateInput(e) {
+	          return _this2.handleUpdate(e);
+	        },
+	        onNewRequest: function onNewRequest(e, i) {
+	          return _this2.handleSubmit(e, i);
+	        },
+	        menuCloseDelay: 0
 	      });
 	    }
 	  }]);
@@ -39765,7 +39789,6 @@
 	  _createClass(DeleteButton, [{
 	    key: 'handleDelete',
 	    value: function handleDelete(data) {
-	      console.log("delete!");
 	      var updateData = [];
 
 	      // deletes checked items and
@@ -39799,9 +39822,6 @@
 	          }
 	        }
 	      }
-
-	      console.log("BEFORE UPDATE:", data);
-	      console.log("AFTER UPDATE:", updateData);
 
 	      this.props.updateStatus(updateData);
 	    }

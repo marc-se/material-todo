@@ -27,8 +27,6 @@ class TodoList extends React.Component {
   render() {
 	var items = this.props.data.map( (item) => {
 
-		console.log(item.checked);
-
 		return (
 			<ListItem
 			    leftCheckbox={<Checkbox defaultChecked={item.checked} onCheck={ (e, checked) => this.itemStatus(item, checked) } />}

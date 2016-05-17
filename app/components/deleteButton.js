@@ -16,7 +16,6 @@ const styles = {
 
 class DeleteButton extends React.Component {
   handleDelete(data) {
-  	console.log("delete!");
   	var updateData = [];
 
   	// deletes checked items and 
@@ -29,9 +28,6 @@ class DeleteButton extends React.Component {
   			this.props.storage.removeItem(item.key);
   		}
   	}
-
-  	console.log("BEFORE UPDATE:", data);
-  	console.log("AFTER UPDATE:", updateData);
 
   	this.props.updateStatus(updateData);
   }
