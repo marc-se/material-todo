@@ -64,6 +64,10 @@
 
 	var _MuiThemeProvider2 = _interopRequireDefault(_MuiThemeProvider);
 
+	var _businessTheme = __webpack_require__(374);
+
+	var _businessTheme2 = _interopRequireDefault(_businessTheme);
+
 	var _headerBadge = __webpack_require__(370);
 
 	var _headerBadge2 = _interopRequireDefault(_headerBadge);
@@ -91,6 +95,8 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var todoTheme = (0, _getMuiTheme2.default)(_businessTheme2.default);
 
 	var storage = localStorage;
 
@@ -281,10 +287,10 @@
 						{ className: 'col-md-8' },
 						_react2.default.createElement(
 							_MuiThemeProvider2.default,
-							{ muiTheme: (0, _getMuiTheme2.default)() },
+							{ muiTheme: todoTheme },
 							_react2.default.createElement(
 								'div',
-								null,
+								{ className: 'app-head' },
 								_react2.default.createElement(_headerBadge2.default, { count: this.state.data.length }),
 								_react2.default.createElement(
 									'h1',
@@ -300,21 +306,21 @@
 						),
 						_react2.default.createElement(
 							_MuiThemeProvider2.default,
-							{ muiTheme: (0, _getMuiTheme2.default)() },
+							{ muiTheme: todoTheme },
 							_react2.default.createElement(_todoList2.default, { data: this.state.data, storage: storage, updateStatus: function updateStatus(data) {
 									return _this2.updateStatus(_this2.state.data);
 								} })
 						),
 						_react2.default.createElement(
 							_MuiThemeProvider2.default,
-							{ muiTheme: (0, _getMuiTheme2.default)() },
+							{ muiTheme: todoTheme },
 							_react2.default.createElement(_todoInput2.default, { addItem: function addItem(e) {
 									return _this2.addItem(e);
 								}, fuzzySearch: this.state.fuzzySearch })
 						),
 						_react2.default.createElement(
 							_MuiThemeProvider2.default,
-							{ muiTheme: (0, _getMuiTheme2.default)() },
+							{ muiTheme: todoTheme },
 							_react2.default.createElement(_deleteButton2.default, { data: this.state.data, storage: storage, updateStatus: function updateStatus(data) {
 									return _this2.updateStatus(data);
 								} })
@@ -29166,7 +29172,7 @@
 
 				return _react2.default.createElement(
 					'div',
-					{ className: 'container' },
+					null,
 					_react2.default.createElement(
 						_List.List,
 						null,
@@ -44954,7 +44960,8 @@
 	      {
 	        badgeContent: props.count,
 	        secondary: true,
-	        badgeStyle: { top: 12, right: 12 }
+	        badgeStyle: { top: 12, right: 12 },
+	        style: { position: 'absolute', top: -25, right: -20 }
 	      },
 	      _react2.default.createElement(
 	        _IconButton2.default,
@@ -45188,6 +45195,53 @@
 	SocialNotifications.displayName = 'SocialNotifications';
 
 	exports.default = SocialNotifications;
+
+/***/ },
+/* 374 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _colors = __webpack_require__(179);
+
+	var _colorManipulator = __webpack_require__(176);
+
+	var _spacing = __webpack_require__(180);
+
+	var _spacing2 = _interopRequireDefault(_spacing);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 *  Light Theme is the default theme used in material-ui. It is guaranteed to
+	 *  have all theme variables needed for every component. Variables not defined
+	 *  in a custom theme will default to these values.
+	 */
+
+	exports.default = {
+	  spacing: _spacing2.default,
+	  fontFamily: 'Roboto, sans-serif',
+	  palette: {
+	    primary1Color: _colors.cyan500,
+	    primary2Color: _colors.cyan700,
+	    primary3Color: _colors.grey400,
+	    accent1Color: _colors.pinkA200,
+	    accent2Color: _colors.grey100,
+	    accent3Color: _colors.grey500,
+	    textColor: _colors.grey800,
+	    alternateTextColor: _colors.white,
+	    canvasColor: _colors.white,
+	    borderColor: _colors.grey300,
+	    disabledColor: (0, _colorManipulator.fade)(_colors.darkBlack, 0.3),
+	    pickerHeaderColor: _colors.cyan500,
+	    clockCircleColor: (0, _colorManipulator.fade)(_colors.darkBlack, 0.07),
+	    shadowColor: _colors.fullBlack
+	  }
+	};
 
 /***/ }
 /******/ ]);

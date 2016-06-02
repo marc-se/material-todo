@@ -9,6 +9,7 @@ const HeaderBadge = (props) => (
       badgeContent={ props.count }
       secondary={ true }
       badgeStyle={ {top: 12, right: 12} }
+      style={ {position: 'absolute', top: -25, right: -20} }
     >
       <IconButton tooltip="You have some things to do!">
         <NotificationsIcon />

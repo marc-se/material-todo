@@ -39,7 +39,7 @@ class TodoList extends React.Component {
 	});
 
 	return (
-		<div className='container'>
+		<div>
 		      <List>
 		      	{items}
 		      </List>

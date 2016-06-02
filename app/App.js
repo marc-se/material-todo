@@ -2,11 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import businessTheme from 'material-ui/styles/baseThemes/businessTheme';
 import HeaderBadge from './components/headerBadge';
 import TodoList from './components/todoList';
 import TodoInput from './components/todoInput';
 import DeleteButton from './components/deleteButton';
 import hash from 'object-hash';
+
+const todoTheme = getMuiTheme(businessTheme);
 
 var storage = localStorage;
 
@@ -113,20 +116,20 @@ class App extends React.Component {
 			<div className='container'>
 				<div className="col-md-2"></div>
 		    	<div className="col-md-8">
-		    		<MuiThemeProvider muiTheme={ getMuiTheme() } >
-				    	<div>
+		    		<MuiThemeProvider muiTheme={ todoTheme } >
+				    	<div className="app-head">
 				    		<HeaderBadge count={ this.state.data.length } />
 				    		<h1>Get it done!</h1>
 				    		<h2>Hey, seems like you have something to do</h2>
 				    	</div>
 				  	</MuiThemeProvider>
-					<MuiThemeProvider muiTheme={ getMuiTheme() } >
+					<MuiThemeProvider muiTheme={ todoTheme } >
 				    	<TodoList data={ this.state.data } storage={ storage } updateStatus={ (data) => this.updateStatus(this.state.data)} />
 				  	</MuiThemeProvider>
-				  	<MuiThemeProvider muiTheme={ getMuiTheme() } >
+				  	<MuiThemeProvider muiTheme={ todoTheme } >
 				    	<TodoInput addItem={ (e) => this.addItem(e) } fuzzySearch={ this.state.fuzzySearch } />
 				  	</MuiThemeProvider>
-				  	<MuiThemeProvider muiTheme={ getMuiTheme() } >
+				  	<MuiThemeProvider muiTheme={ todoTheme } >
 				  		<DeleteButton data={ this.state.data } storage={ storage } updateStatus={ (data) => this.updateStatus(data)} />
 				  	</MuiThemeProvider>
 			  	</div>
