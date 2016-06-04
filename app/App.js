@@ -48,7 +48,8 @@ class App extends React.Component {
         if(typeof(Storage) !== "undefined") {
             this.state = {
                 data: data,
-                fuzzySearch: fuzzySearch
+                fuzzySearch: fuzzySearch,
+                oldState: {data: {}, lastKey: '' }
             };
         } else {
             // if browser doesn´t know about localStorage
@@ -69,14 +70,16 @@ class App extends React.Component {
     }
     addItem(e) {
     	// todo: function that seperates text from subtext (indicate subtext via "#")
+    	let oldState = this.state.data;
+
     	let textArr = e;
 
     	let item = {
-    			key: hash(e),
-    			text: textArr.indexOf('#') == -1 ? e : (textArr.split('#'))[0].trim(),
-    			subtext: textArr.indexOf('#') == -1 ? "" : (textArr.split('#'))[1].trim(),
-    			checked: false
-    		};
+			key: hash(e),
+			text: textArr.indexOf('#') == -1 ? e : (textArr.split('#'))[0].trim(),
+			subtext: textArr.indexOf('#') == -1 ? "" : (textArr.split('#'))[1].trim(),
+			checked: false
+    	};
 
     	var updateData = [];
     	var updateFuzzySearch = [];
@@ -100,7 +103,11 @@ class App extends React.Component {
     	// update localstorage and FUZZY_SEARCH storage
 		this.syncStorage(storage, updateData, updateFuzzySearch);
 
-		this.setState({data: updateData, fuzzySearch: updateFuzzySearch});
+		this.setState({
+			data: updateData, 
+			fuzzySearch: updateFuzzySearch, 
+			oldState: {data: oldState, lastKey: item.key }
+		});
     }
     updateStatus(data) {
     	var updateData = [];
@@ -110,6 +117,13 @@ class App extends React.Component {
     	}
 
     	this.setState({data: updateData});
+    }
+    handleUndo() {
+    	storage.removeItem(this.state.oldState.lastKey);
+    	
+    	this.setState({
+    		data: this.state.oldState.data
+    	});
     }
     render() {
 		return (
@@ -127,7 +141,7 @@ class App extends React.Component {
 				    	<TodoList data={ this.state.data } storage={ storage } updateStatus={ (data) => this.updateStatus(this.state.data)} />
 				  	</MuiThemeProvider>
 				  	<MuiThemeProvider muiTheme={ todoTheme } >
-				    	<TodoInput addItem={ (e) => this.addItem(e) } fuzzySearch={ this.state.fuzzySearch } />
+				    	<TodoInput handleUndo={ () => this.handleUndo() } addItem={ (e) => this.addItem(e) } fuzzySearch={ this.state.fuzzySearch } />
 				  	</MuiThemeProvider>
 				  	<MuiThemeProvider muiTheme={ todoTheme } >
 				  		<DeleteButton data={ this.state.data } storage={ storage } updateStatus={ (data) => this.updateStatus(data)} />
