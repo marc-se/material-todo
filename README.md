@@ -12,4 +12,8 @@ npm start
 - marking items as done strikes them out, so you can restore them if you accidentially mark one item as done
 - delete feature for all marked items
 - notification with count of all open items
+<<<<<<< HEAD
 - you can add a subtext via the '#' symbol, for example: pick up kids from school #at 03:30pm
+=======
+- you can add a subtext via the '#' symbol, for example: pick up kids from school #at 03:30pm
+>>>>>>> c4b797916cb58cbde523e72e5fe55ece57816fe1
