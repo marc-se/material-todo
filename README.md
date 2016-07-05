@@ -3,4 +3,6 @@ simple [react](https://github.com/facebook/react) todo using [material-ui](https
 ## How to use?
 ```
 npm install
+
+npm start
 ```
