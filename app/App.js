@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import businessTheme from 'material-ui/styles/baseThemes/businessTheme';
+import businessTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import HeaderBadge from './components/headerBadge';
 import TodoList from './components/todoList';
 import TodoInput from './components/todoInput';
@@ -69,7 +69,6 @@ class App extends React.Component {
 		}
     }
     addItem(e) {
-    	// todo: function that seperates text from subtext (indicate subtext via "#")
     	let oldState = this.state.data;
 
     	let textArr = e;
