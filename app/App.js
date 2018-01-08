@@ -13,29 +13,28 @@ const todoTheme = getMuiTheme(businessTheme);
 
 var storage = localStorage;
 
-var data = [],
-	fuzzySearch = [''];
+var data = [], fuzzySearch = [ '' ];
 
 //storage.clear();
 
 class App extends React.Component {
-    constructor() {
-        super();
+	constructor() {
+		super();
 
-        var injectTapEventPlugin = require("react-tap-event-plugin");
+		const injectTapEventPlugin = require('react-tap-event-plugin');
 		injectTapEventPlugin();
 
 		for (let item in storage) {
-			if (item !== "FUZZY_SEARCH") {
+			if (item !== 'FUZZY_SEARCH') {
 				data.push(JSON.parse(storage.getItem(item)));
-			} 
+			}
 		}
 
 		if (storage.getItem('FUZZY_SEARCH') !== null) {
 			let fuzzy_storage = storage.getItem('FUZZY_SEARCH').split(',');
 
 			for (let item of fuzzy_storage) {
-				if (item != "") {
+				if (item != '') {
 					fuzzySearch.push(item);
 				}
 			}
@@ -45,21 +44,22 @@ class App extends React.Component {
 			storage.setItem('FUZZY_SEARCH', fuzzySearch);
 		}
 
-        if(typeof(Storage) !== "undefined") {
-            this.state = {
-                data: data,
-                fuzzySearch: fuzzySearch,
-                oldState: {data: {}, lastKey: '' }
-            };
-        } else {
-            // if browser doesn´t know about localStorage
-        }
-    }
-    syncStorage(local_storage, tmp_data_storage, fuzzy_storage) {
+		if (typeof Storage !== 'undefined') {
+			this.state = {
+				data: data,
+				fuzzySearch: fuzzySearch,
+				oldState: { data: {}, lastKey: '' },
+			};
+		} else {
+			// if browser doesn´t know about localStorage
+		}
+	}
+
+	syncStorage(local_storage, tmp_data_storage, fuzzy_storage) {
 		for (let item in local_storage) {
-			if (item !== "FUZZY_SEARCH") {
+			if (item !== 'FUZZY_SEARCH') {
 				tmp_data_storage.push(JSON.parse(local_storage.getItem(item)));
-			} else if (fuzzy_storage !== 'undefined'){
+			} else if (fuzzy_storage !== 'undefined') {
 				storage.setItem('FUZZY_SEARCH', fuzzy_storage);
 
 				for (let item of fuzzy_storage) {
@@ -67,92 +67,86 @@ class App extends React.Component {
 				}
 			}
 		}
-    }
-    addItem(e) {
-    	let oldState = this.state.data;
+	}
+	addItem(e) {
+		let oldState = this.state.data;
 
-    	let textArr = e;
+		let textArr = e;
 
-    	let item = {
+		let item = {
 			key: hash(e),
-			text: textArr.indexOf('#') == -1 ? e : (textArr.split('#'))[0].trim(),
-			subtext: textArr.indexOf('#') == -1 ? "" : (textArr.split('#'))[1].trim(),
-			checked: false
-    	};
+			text: textArr.indexOf('#') == -1 ? e : textArr.split('#')[0].trim(),
+			subtext: textArr.indexOf('#') == -1 ? '' : textArr.split('#')[1].trim(),
+			checked: false,
+		};
 
-    	var updateData = [];
-    	var updateFuzzySearch = [];
+		var updateData = [];
+		var updateFuzzySearch = [];
 
-    	storage.setItem(item.key, JSON.stringify(item));
+		storage.setItem(item.key, JSON.stringify(item));
 
-    	// update FUZZY_SEARCH storage
-    	updateFuzzySearch = storage.getItem('FUZZY_SEARCH').split(',');
+		// update FUZZY_SEARCH storage
+		updateFuzzySearch = storage.getItem('FUZZY_SEARCH').split(',');
 
-    	// add new item and avoid duplicate entries
-    	updateFuzzySearch.push(e);
+		// add new item and avoid duplicate entries
+		updateFuzzySearch.push(e);
 		updateFuzzySearch = updateFuzzySearch.filter(function(item, pos) {
-		    return updateFuzzySearch.indexOf(item) == pos;
+			return updateFuzzySearch.indexOf(item) == pos;
 		});
 
-    	// autocomplete field holds max 11 items minus dummy element ''
-    	if (updateFuzzySearch.length > 11) {
-			updateFuzzySearch.splice(1,1);
+		// autocomplete field holds max 11 items minus dummy element ''
+		if (updateFuzzySearch.length > 11) {
+			updateFuzzySearch.splice(1, 1);
 		}
 
-    	// update localstorage and FUZZY_SEARCH storage
+		// update localstorage and FUZZY_SEARCH storage
 		this.syncStorage(storage, updateData, updateFuzzySearch);
 
 		this.setState({
-			data: updateData, 
-			fuzzySearch: updateFuzzySearch, 
-			oldState: {data: oldState, lastKey: item.key }
+			data: updateData,
+			fuzzySearch: updateFuzzySearch,
+			oldState: { data: oldState, lastKey: item.key },
 		});
-    }
-    updateStatus(data) {
-    	var updateData = [];
+	}
+	updateStatus(data) {
+		let updateData = [];
 
-    	for (let item of data) {
-    		updateData.push(item);
-    	}
+		for (let item of data) {
+			updateData.push(item);
+		}
 
-    	this.setState({data: updateData});
-    }
-    handleUndo() {
-    	storage.removeItem(this.state.oldState.lastKey);
-    	
-    	this.setState({
-    		data: this.state.oldState.data
-    	});
-    }
-    render() {
+		this.setState({ data: updateData });
+	}
+	render() {
 		return (
-			<div className='container'>
-				<div className="col-md-2"></div>
-		    	<div className="col-md-8">
-		    		<MuiThemeProvider muiTheme={ todoTheme } >
-				    	<div className="app-head">
-				    		<HeaderBadge count={ this.state.data.length } />
-				    		<h1>Get it done!</h1>
-				    		<h2>Hey, seems like you have something to do</h2>
-				    	</div>
-				  	</MuiThemeProvider>
-					<MuiThemeProvider muiTheme={ todoTheme } >
-				    	<TodoList data={ this.state.data } storage={ storage } updateStatus={ (data) => this.updateStatus(this.state.data)} />
-				  	</MuiThemeProvider>
-				  	<MuiThemeProvider muiTheme={ todoTheme } >
-				    	<TodoInput handleUndo={ () => this.handleUndo() } addItem={ (e) => this.addItem(e) } fuzzySearch={ this.state.fuzzySearch } />
-				  	</MuiThemeProvider>
-				  	<MuiThemeProvider muiTheme={ todoTheme } >
-				  		<DeleteButton data={ this.state.data } storage={ storage } updateStatus={ (data) => this.updateStatus(data)} />
-				  	</MuiThemeProvider>
-			  	</div>
-			  	<div className="col-md-2"></div>
-		  	</div>
+			<div className="container">
+				<div className="col-md-2" />
+				<div className="col-md-8">
+					<MuiThemeProvider muiTheme={todoTheme}>
+						<div className="app-head">
+							<HeaderBadge count={this.state.data.length} />
+							<h1>Get it done!</h1>
+							<h2>Hey, seems like you have something to do</h2>
+						</div>
+					</MuiThemeProvider>
+					<MuiThemeProvider muiTheme={todoTheme}>
+						<TodoList
+							data={this.state.data}
+							storage={storage}
+							updateStatus={data => this.updateStatus(this.state.data)}
+						/>
+					</MuiThemeProvider>
+					<MuiThemeProvider muiTheme={todoTheme}>
+						<TodoInput addItem={e => this.addItem(e)} fuzzySearch={this.state.fuzzySearch} />
+					</MuiThemeProvider>
+					<MuiThemeProvider muiTheme={todoTheme}>
+						<DeleteButton data={this.state.data} storage={storage} updateStatus={data => this.updateStatus(data)} />
+					</MuiThemeProvider>
+				</div>
+				<div className="col-md-2" />
+			</div>
 		);
-    }
-};
+	}
+}
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('app')
-);
+ReactDOM.render(<App />, document.getElementById('app'));
