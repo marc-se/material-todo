@@ -13,20 +13,25 @@ const todoTheme = getMuiTheme(businessTheme);
 
 var storage = localStorage;
 
-var data = [], fuzzySearch = [ '' ];
+let data = [], fuzzySearch = [ '' ];
 
 //storage.clear();
 
 class App extends React.Component {
-	constructor() {
-		super();
+	state = {
+		data: [],
+		fuzzySearch: [],
+		oldState: { data: {}, lastKey: '' },
+	};
 
+	componentDidMount() {
 		const injectTapEventPlugin = require('react-tap-event-plugin');
 		injectTapEventPlugin();
 
 		for (let item in storage) {
 			if (item !== 'FUZZY_SEARCH') {
-				data.push(JSON.parse(storage.getItem(item)));
+				let obj = JSON.parse(storage.getItem(item));
+				obj && data.push(obj);
 			}
 		}
 
@@ -45,11 +50,11 @@ class App extends React.Component {
 		}
 
 		if (typeof Storage !== 'undefined') {
-			this.state = {
+			this.setState({
 				data: data,
 				fuzzySearch: fuzzySearch,
 				oldState: { data: {}, lastKey: '' },
-			};
+			});
 		} else {
 			// if browser doesn´t know about localStorage
 		}
@@ -58,7 +63,8 @@ class App extends React.Component {
 	syncStorage(local_storage, tmp_data_storage, fuzzy_storage) {
 		for (let item in local_storage) {
 			if (item !== 'FUZZY_SEARCH') {
-				tmp_data_storage.push(JSON.parse(local_storage.getItem(item)));
+				let obj = JSON.parse(local_storage.getItem(item));
+				obj && tmp_data_storage.push(obj);
 			} else if (fuzzy_storage !== 'undefined') {
 				storage.setItem('FUZZY_SEARCH', fuzzy_storage);
 
@@ -80,8 +86,8 @@ class App extends React.Component {
 			checked: false,
 		};
 
-		var updateData = [];
-		var updateFuzzySearch = [];
+		let updateData = [];
+		let updateFuzzySearch = [];
 
 		storage.setItem(item.key, JSON.stringify(item));
 

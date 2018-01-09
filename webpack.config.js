@@ -1,3 +1,5 @@
+const webpack = require('webpack');
+
 module.exports = {
 	entry: './app/App.js',
 	output: {
@@ -10,6 +12,12 @@ module.exports = {
 			chunks: false,
 		},
 	},
+	plugins: [
+		new webpack.optimize.UglifyJsPlugin({
+			include: /\.min\.js$/,
+			minimize: true,
+		}),
+	],
 	module: {
 		loaders: [
 			{
